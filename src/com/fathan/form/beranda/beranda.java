@@ -24,20 +24,22 @@ public class beranda extends javax.swing.JFrame {
      * Creates new form login
      */
     com.fathan.user.user usr = new com.fathan.user.user();
+
     public beranda() {
         initComponents();
-        this.setBackground(new Color(0,0,0,0));
-        panel_top.setBackground(new Color(255,255,255,240));
-        panel_top1.setBackground(new Color(255,255,255,230));
+        this.setBackground(new Color(0, 0, 0, 0));
+        panel_top.setBackground(new Color(255, 255, 255, 240));
+        panel_top1.setBackground(new Color(255, 255, 255, 230));
         if (usr.getNama() == null) {
             label_ucapan.setText("Selamat Datang, fulan");
             label_nama.setText("nothing else");
         } else {
-            label_ucapan.setText("Selamat Datang, "+usr.getNama());
+            label_ucapan.setText("Selamat Datang, " + usr.getNama());
             label_nama.setText(usr.getNama_lengkap());
             label_nama1.setText(usr.getRole().toUpperCase());
         }
         
+
     }
 
     /**
@@ -51,9 +53,7 @@ public class beranda extends javax.swing.JFrame {
 
         panelBordeer1 = new com.fathan.swing.PanelBordeer();
         panel_top1 = new com.fathan.swing.PanelRound();
-        panelRound3 = new com.fathan.swing.PanelRound();
-        panelRound2 = new com.fathan.swing.PanelRound();
-        panelRound1 = new com.fathan.swing.PanelRound();
+        panelBorderGradient1 = new com.fathan.swing.PanelBorderGradient();
         jLabel2 = new javax.swing.JLabel();
         button1 = new com.fathan.form.beranda.Button();
         button2 = new com.fathan.form.beranda.Button();
@@ -62,6 +62,8 @@ public class beranda extends javax.swing.JFrame {
         button5 = new com.fathan.form.beranda.Button();
         button6 = new com.fathan.form.beranda.Button();
         button7 = new com.fathan.form.beranda.Button();
+        panelBorderGradient11 = new com.fathan.swing.PanelBorderGradient1();
+        panelBorderGradient21 = new com.fathan.swing.PanelBorderGradient2();
         jLabel1 = new javax.swing.JLabel();
         panel_top = new com.fathan.swing.PanelRound();
         label_nama1 = new javax.swing.JLabel();
@@ -88,64 +90,25 @@ public class beranda extends javax.swing.JFrame {
         panel_top1.setRoundBottomRight(15);
         panel_top1.setRoundTopLeft(15);
         panel_top1.setRoundTopRight(15);
+        panel_top1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_top1MouseClicked(evt);
+            }
+        });
         panel_top1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelRound3.setBackground(new java.awt.Color(19, 179, 200));
-        panelRound3.setRoundBottomLeft(15);
-        panelRound3.setRoundBottomRight(15);
-        panelRound3.setRoundTopLeft(15);
-        panelRound3.setRoundTopRight(15);
-
-        javax.swing.GroupLayout panelRound3Layout = new javax.swing.GroupLayout(panelRound3);
-        panelRound3.setLayout(panelRound3Layout);
-        panelRound3Layout.setHorizontalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelBorderGradient1Layout = new javax.swing.GroupLayout(panelBorderGradient1);
+        panelBorderGradient1.setLayout(panelBorderGradient1Layout);
+        panelBorderGradient1Layout.setHorizontalGroup(
+            panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 370, Short.MAX_VALUE)
         );
-        panelRound3Layout.setVerticalGroup(
-            panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelBorderGradient1Layout.setVerticalGroup(
+            panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelRound3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 370, 150));
-
-        panelRound2.setBackground(new java.awt.Color(19, 179, 200));
-        panelRound2.setRoundBottomLeft(15);
-        panelRound2.setRoundBottomRight(15);
-        panelRound2.setRoundTopLeft(15);
-        panelRound2.setRoundTopRight(15);
-
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        panel_top1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, 370, 150));
-
-        panelRound1.setBackground(new java.awt.Color(19, 179, 200));
-        panelRound1.setRoundBottomLeft(15);
-        panelRound1.setRoundBottomRight(15);
-        panelRound1.setRoundTopLeft(15);
-        panelRound1.setRoundTopRight(15);
-
-        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
-        panelRound1.setLayout(panelRound1Layout);
-        panelRound1Layout.setHorizontalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
-        );
-        panelRound1Layout.setVerticalGroup(
-            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
-        );
-
-        panel_top1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 370, 150));
+        panel_top1.add(panelBorderGradient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -162,12 +125,22 @@ public class beranda extends javax.swing.JFrame {
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("Kategori");
         button2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 270, 50));
 
         button3.setBackground(new java.awt.Color(75, 201, 217));
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Produk");
         button3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 270, 50));
 
         button4.setBackground(new java.awt.Color(75, 201, 217));
@@ -194,6 +167,34 @@ public class beranda extends javax.swing.JFrame {
         button7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         panel_top1.add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 270, 50));
 
+        panelBorderGradient11.setPreferredSize(new java.awt.Dimension(370, 150));
+
+        javax.swing.GroupLayout panelBorderGradient11Layout = new javax.swing.GroupLayout(panelBorderGradient11);
+        panelBorderGradient11.setLayout(panelBorderGradient11Layout);
+        panelBorderGradient11Layout.setHorizontalGroup(
+            panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+        panelBorderGradient11Layout.setVerticalGroup(
+            panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_top1.add(panelBorderGradient11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 370, 150));
+
+        javax.swing.GroupLayout panelBorderGradient21Layout = new javax.swing.GroupLayout(panelBorderGradient21);
+        panelBorderGradient21.setLayout(panelBorderGradient21Layout);
+        panelBorderGradient21Layout.setHorizontalGroup(
+            panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+        panelBorderGradient21Layout.setVerticalGroup(
+            panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_top1.add(panelBorderGradient21, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, 370, 150));
+
         panelBordeer1.add(panel_top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 1220, 490));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/bg_beranda.png"))); // NOI18N
@@ -204,6 +205,11 @@ public class beranda extends javax.swing.JFrame {
         panel_top.setRoundBottomRight(15);
         panel_top.setRoundTopLeft(15);
         panel_top.setRoundTopRight(15);
+        panel_top.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panel_topMouseClicked(evt);
+            }
+        });
         panel_top.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_nama1.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
@@ -221,6 +227,11 @@ public class beranda extends javax.swing.JFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_person.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         panel_top.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 0, 70, 70));
 
         label_ucapan.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 22)); // NOI18N
@@ -250,7 +261,57 @@ public class beranda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        new com.fathan.form.kategori.kategori().setVisible(true);
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        new com.fathan.form.produk.produk().setVisible(true);
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        new com.fathan.form.about.lainnya(this, true).setVisible(true);
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void panel_topMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_topMouseClicked
+        
+    }//GEN-LAST:event_panel_topMouseClicked
+
+    private void panel_top1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_top1MouseClicked
+        
+    }//GEN-LAST:event_panel_top1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -302,9 +363,9 @@ public class beranda extends javax.swing.JFrame {
     public javax.swing.JLabel label_nama1;
     public javax.swing.JLabel label_ucapan;
     private com.fathan.swing.PanelBordeer panelBordeer1;
-    private com.fathan.swing.PanelRound panelRound1;
-    private com.fathan.swing.PanelRound panelRound2;
-    private com.fathan.swing.PanelRound panelRound3;
+    private com.fathan.swing.PanelBorderGradient panelBorderGradient1;
+    private com.fathan.swing.PanelBorderGradient1 panelBorderGradient11;
+    private com.fathan.swing.PanelBorderGradient2 panelBorderGradient21;
     private com.fathan.swing.PanelRound panel_top;
     private com.fathan.swing.PanelRound panel_top1;
     // End of variables declaration//GEN-END:variables
