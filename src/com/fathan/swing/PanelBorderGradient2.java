@@ -16,12 +16,12 @@ import java.awt.RenderingHints;
  *
  * @author LenataHoma
  */
-public class PanelBorder2color extends javax.swing.JPanel {
+public class PanelBorderGradient2 extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelBordeer
      */
-    public PanelBorder2color() {
+    public PanelBorderGradient2() {
         initComponents();
         setOpaque(false);
     }
@@ -51,10 +51,10 @@ public class PanelBorder2color extends javax.swing.JPanel {
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D)grphcs;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        GradientPaint g = new GradientPaint(0, 0, Color.decode("#8e9eab"), 30, getHeight(), Color.decode("#eef2f3"));
+        GradientPaint g = new GradientPaint(0, 0, Color.decode("#FF2E2E"), getWidth(), 0, Color.decode("#FFBDBD"));
         g2.setPaint(g);
         g2.setBackground(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
         super.paintComponent(grphcs);
     }
 

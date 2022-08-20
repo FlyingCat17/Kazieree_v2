@@ -11,7 +11,9 @@ import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 /**
  *
@@ -26,8 +28,23 @@ public class login extends javax.swing.JFrame {
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
         label_salah.setVisible(false);
+        label_salah1.setVisible(false);
+        clear_log();
+        new com.fathan.form.beranda.beranda().setVisible(false);
     }
 
+    public void clear_log(){
+        try {
+            String sql = "DELETE FROM log_pengguna WHERE DATEDIFF(CURTIME(), log_pengguna.stamp) > 30";
+            java.sql.Connection con = (Connection)configdb.GetConnection();
+            java.sql.Statement st = con.createStatement();
+            st.execute(sql);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +55,7 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBordeer1 = new com.fathan.swing.PanelBordeer();
+        label_salah1 = new javax.swing.JLabel();
         label_forgerpw = new javax.swing.JLabel();
         label_salah = new javax.swing.JLabel();
         button3 = new com.fathan.swing.Button();
@@ -70,6 +88,12 @@ public class login extends javax.swing.JFrame {
 
         panelBordeer1.setForeground(new java.awt.Color(204, 204, 204));
         panelBordeer1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_salah1.setFont(new java.awt.Font("Montserrat Medium", 0, 11)); // NOI18N
+        label_salah1.setForeground(new java.awt.Color(255, 0, 0));
+        label_salah1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        label_salah1.setText("Gagal Masuk!");
+        panelBordeer1.add(label_salah1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 430, 150, 20));
 
         label_forgerpw.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         label_forgerpw.setForeground(new java.awt.Color(68, 185, 200));
@@ -221,6 +245,7 @@ public class login extends javax.swing.JFrame {
     com.fathan.user.user usr = new com.fathan.user.user();
 
     public void login() {
+        
         try {
             String sql = "SELECT * FROM `pengguna` WHERE nama_pengguna = '" + field_username.getText() + "' && kata_sandi = '" + field_password.getText() + "';";
             Connection con = (Connection) configdb.GetConnection();
@@ -244,10 +269,20 @@ public class login extends javax.swing.JFrame {
                         new com.fathan.form.beranda.beranda().label_ucapan.setText("Selamat Datang, "+rs.getString("nama_pengguna"));
                         new com.fathan.form.beranda.beranda().label_nama.setText(rss.getString("nama_lengkap"));
                         usr.setNama_Lengkap(rss.getString("nama_lengkap"));
-                        new com.fathan.form.beranda.beranda().setVisible(true);
+                        try {
+                            Date today = new Date();
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                            String stampLoginAdmin = "INSERT INTO `log_pengguna`(`no_log`, `id_pengguna`, `nama_pengguna`, `role`, `stamp`, `tipe`) "
+                                + "VALUES (NULL, '"+usr.getId_pengguna()+"','"+usr.getNama()+"','"+usr.getRole()+"','"+sdf.format(today)+"','Masuk')";
+                            Connection con1 = (Connection)configdb.GetConnection();
+                            Statement st1 = con1.createStatement();
+                            st1.execute(stampLoginAdmin);
+                            new com.fathan.form.beranda.beranda().setVisible(true);
+                        } catch (Exception e) {
+                            label_salah1.setVisible(true);
+                            System.err.println(e.getMessage());
+                        }
                     }
-                    
-                    
                     for (double i = 1.0; i >= 0.1; i = i - 0.25) {
                         String val = i + "";
                         float f = Float.valueOf(val);
@@ -278,6 +313,7 @@ public class login extends javax.swing.JFrame {
 
         }
     }
+    
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         login();
     }//GEN-LAST:event_button2ActionPerformed
@@ -377,6 +413,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_forgerpw;
     private javax.swing.JLabel label_salah;
+    private javax.swing.JLabel label_salah1;
     private com.fathan.swing.PanelBordeer panelBordeer1;
     private com.fathan.swing.PanelBordeer panelBordeer2;
     private com.fathan.swing.PanelBordeer panelBordeer3;
