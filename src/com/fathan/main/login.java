@@ -31,6 +31,7 @@ public class login extends javax.swing.JFrame {
         label_salah1.setVisible(false);
         clear_log();
         new com.fathan.form.beranda.beranda().setVisible(false);
+        System.out.println(new com.fathan.form.about.logout().getStatusLog_Out());
     }
 
     public void clear_log(){

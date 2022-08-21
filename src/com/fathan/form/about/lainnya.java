@@ -5,7 +5,13 @@
  */
 package com.fathan.form.about;
 
+import com.fathan.db.configdb;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -102,7 +108,36 @@ public class lainnya extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    com.fathan.user.user usr = new com.fathan.user.user();
+
+    public void stampLog_out() {
+        try {
+            String sql = "SELECT * FROM `pengguna` WHERE nama_pengguna = '" + usr.getNama() + "';";
+            Connection con = (Connection) configdb.GetConnection();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                if (rs.getString("role").equals("admin")) {
+                    try {
+                        Date today = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        String stampLoginAdmin = "INSERT INTO `log_pengguna`(`no_log`, `id_pengguna`, `nama_pengguna`, `role`, `stamp`, `tipe`) "
+                                + "VALUES (NULL, '" + usr.getId_pengguna() + "','" + usr.getNama() + "','" + usr.getRole() + "','" + sdf.format(today) + "','Keluar')";
+                        Connection con1 = (Connection) configdb.GetConnection();
+                        Statement st1 = con1.createStatement();
+                        st1.execute(stampLoginAdmin);
+                    } catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+    }
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        new com.fathan.form.about.logout().setLog_out(true);
         for (double i = 1.0; i >= 0.1; i = i - 0.25) {
             String val = i + "";
             float f = Float.valueOf(val);
@@ -117,17 +152,6 @@ public class lainnya extends javax.swing.JDialog {
                         float f1 = Float.valueOf(val1);
                         new com.fathan.form.beranda.beranda().setOpacity(f1);
                         System.out.println(f1);
-                        try {
-                            Thread.sleep(1);
-                            if (new com.fathan.form.beranda.beranda().getOpacity() <= 0.25) {
-                                new com.fathan.form.beranda.beranda().dispose();
-
-                            }
-
-                        } catch (Exception e) {
-                            System.out.println(e.getMessage());
-                        }
-
                     }
                 }
 
@@ -136,6 +160,7 @@ public class lainnya extends javax.swing.JDialog {
             }
 
         }
+        stampLog_out();
         new com.fathan.main.login().setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 
