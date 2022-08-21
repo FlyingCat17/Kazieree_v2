@@ -300,7 +300,28 @@ public class beranda extends javax.swing.JFrame {
     }//GEN-LAST:event_button3ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        
         new com.fathan.form.about.lainnya(this, true).setVisible(true);
+        if (new com.fathan.form.about.logout().yn==true) {
+//            new com.fathan.form.about.lainnya(this, true).stampLog_out();
+            new com.fathan.form.about.logout().setLog_out(false);
+            for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        }
+        }
         
     }//GEN-LAST:event_jLabel4MouseClicked
 

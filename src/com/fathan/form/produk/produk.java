@@ -14,7 +14,9 @@ import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,6 +34,77 @@ public class produk extends javax.swing.JFrame {
         this.setBackground(new Color(0, 0, 0, 0));
         panel_top.setBackground(new Color(255, 255, 255, 210));
         panel_top1.setBackground(new Color(255, 255, 255, 210));
+        getKategori();
+        loadTableProduk();
+        label_emptyData.setVisible(false);
+
+    }
+
+    public void getKategori() {
+        combobox1.addItem("Semua");
+        try {
+            String getCat = "SELECT kategori.nama_kategori FROM kategori";
+            java.sql.Connection con = (Connection) configdb.GetConnection();
+            java.sql.Statement st = con.createStatement();
+            java.sql.ResultSet rs = st.executeQuery(getCat);
+            while (rs.next()) {
+                String kategori = rs.getString("nama_kategori");
+                combobox1.addItem(kategori);
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void loadTableProduk() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Kode Produk");
+        model.addColumn("Nama Produk");
+        model.addColumn("Kategori");
+        model.addColumn("Satuan");
+        model.addColumn("Harga Beli");
+        model.addColumn("Harga Jual");
+        model.addColumn("Sisa Stok");
+        tableDark2.setModel(model);
+        try {
+            String load = "SELECT produk.kode_produk, produk.nama_produk, kategori.nama_kategori, produk.satuan, "
+                    + "produk.harga_beli, produk.harga_jual, stok.jumlah_stok\n"
+                    + "FROM produk\n"
+                    + "JOIN kategori\n"
+                    + "ON produk.id_kategori = kategori.id_kategori\n"
+                    + "JOIN stok\n"
+                    + "ON produk.kode_produk = stok.kode_produk\n"
+                    + "ORDER BY produk.nama_produk ASC";
+            java.sql.Connection conn = (Connection)configdb.GetConnection();
+            java.sql.Statement st = conn.createStatement();
+            java.sql.ResultSet rs = st.executeQuery(load);
+            while (rs.next()) {                
+                model.addRow(new Object[]{
+                    rs.getString("kode_produk"),
+                    rs.getString("nama_produk"),
+                    rs.getString("nama_kategori"),
+                    rs.getString("satuan"),
+                    rs.getString("harga_beli"),
+                    rs.getString("harga_jual"),
+                    rs.getString("jumlah_stok")
+                });
+                
+                
+                tableDark2.setModel(model);
+                
+                tableDark2.getColumnModel().getColumn(0).setPreferredWidth(10);
+                tableDark2.getColumnModel().getColumn(1).setPreferredWidth(200);
+                tableDark2.getColumnModel().getColumn(2).setPreferredWidth(1);
+                tableDark2.getColumnModel().getColumn(3).setPreferredWidth(1);
+                tableDark2.getColumnModel().getColumn(4).setPreferredWidth(1);
+                tableDark2.getColumnModel().getColumn(5).setPreferredWidth(1);
+                tableDark2.getColumnModel().getColumn(6).setPreferredWidth(1);
+                
+            }
+            
+        } catch (Exception e) {
+            label_emptyData.setVisible(true);
+            System.err.println("Error on : " + e.getMessage());
+        }
 
     }
 
@@ -46,14 +119,16 @@ public class produk extends javax.swing.JFrame {
 
         panelBordeer1 = new com.fathan.swing.PanelBordeer();
         panel_top1 = new com.fathan.swing.PanelRound();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tableDark2 = new com.fathan.swing.jtable.TableDark();
+        label_emptyData = new javax.swing.JLabel();
         panelRound1 = new com.fathan.swing.PanelRound();
         jLabel2 = new javax.swing.JLabel();
+        field_cari = new javax.swing.JTextField();
         button1 = new com.fathan.form.kategori.Button();
         button2 = new com.fathan.form.kategori.Button();
         button3 = new com.fathan.form.kategori.Button();
         combobox1 = new com.fathan.swing.jcombobox.Combobox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableDark2 = new com.fathan.swing.jtable.TableDark();
         jLabel1 = new javax.swing.JLabel();
         panel_top = new com.fathan.swing.PanelRound();
         label_ucapan = new javax.swing.JLabel();
@@ -80,27 +155,10 @@ public class produk extends javax.swing.JFrame {
         panel_top1.setRoundTopRight(15);
         panel_top1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane2.setBorder(null);
-
-        tableDark2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tableDark2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
-        tableDark2.setGridColor(new java.awt.Color(255, 255, 255));
-        tableDark2.setRowHeight(50);
-        tableDark2.getTableHeader().setResizingAllowed(false);
-        tableDark2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tableDark2);
-
-        panel_top1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 1160, 360));
+        label_emptyData.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        label_emptyData.setForeground(new java.awt.Color(255, 0, 0));
+        label_emptyData.setText("Data Kosong!!");
+        panel_top1.add(label_emptyData, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 510, 40));
 
         panelRound1.setBackground(new java.awt.Color(247, 247, 247));
         panelRound1.setRoundBottomLeft(10);
@@ -111,6 +169,21 @@ public class produk extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/kategori/search.png"))); // NOI18N
         panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 40, 40));
+
+        field_cari.setBackground(new java.awt.Color(247, 247, 247));
+        field_cari.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        field_cari.setBorder(null);
+        field_cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                field_cariActionPerformed(evt);
+            }
+        });
+        field_cari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                field_cariKeyTyped(evt);
+            }
+        });
+        panelRound1.add(field_cari, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 530, 40));
 
         panel_top1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 620, 40));
 
@@ -124,17 +197,55 @@ public class produk extends javax.swing.JFrame {
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("Tambah");
         button2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 13)); // NOI18N
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 100, 40));
 
         button3.setBackground(new java.awt.Color(0, 204, 0));
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Ubah");
         button3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 13)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 30, 100, 40));
 
         combobox1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        combobox1.setLabeText("Pilih Kategori");
         combobox1.setLineColor(new java.awt.Color(19, 179, 200));
         panel_top1.add(combobox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 200, 40));
+
+        jScrollPane2.setBorder(null);
+
+        tableDark2.setForeground(new java.awt.Color(51, 51, 51));
+        tableDark2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tableDark2.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        tableDark2.setGridColor(new java.awt.Color(255, 255, 255));
+        tableDark2.getTableHeader().setResizingAllowed(false);
+        tableDark2.getTableHeader().setReorderingAllowed(false);
+        tableDark2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableDark2MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tableDark2);
+
+        panel_top1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 1160, 350));
 
         panelBordeer1.add(panel_top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 1220, 490));
 
@@ -194,12 +305,45 @@ public class produk extends javax.swing.JFrame {
                 if (this.getOpacity() <= 0.25) {
                     this.dispose();
                 }
-                
+
             } catch (Exception e) {
             }
         }
         new com.fathan.form.beranda.beranda().setVisible(true);
     }//GEN-LAST:event_button4ActionPerformed
+
+    private void field_cariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_cariActionPerformed
+
+    }//GEN-LAST:event_field_cariActionPerformed
+
+    private void field_cariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_cariKeyTyped
+
+    }//GEN-LAST:event_field_cariKeyTyped
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        new com.fathan.form.produk.Tambah_Produk(this, true).setVisible(true);
+        loadTableProduk();
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void tableDark2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDark2MouseClicked
+        if (evt.getClickCount() == 1) {
+            int i = tableDark2.rowAtPoint(evt.getPoint());
+            new com.fathan.form.produk.getdatabarang().setKode_produk(tableDark2.getValueAt(i, 0).toString()); 
+            System.out.println("ID PRODUK = " + new com.fathan.form.produk.getdatabarang().getKode_produk());
+            label_emptyData.setVisible(false);
+            label_emptyData.setText("Data Kosong!!");
+        }
+    }//GEN-LAST:event_tableDark2MouseClicked
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        if (new com.fathan.form.produk.getdatabarang().kode_produk == null) {
+            label_emptyData.setVisible(true);
+            label_emptyData.setText("Harap Pilih Salah Satu Produk !");
+        } else {
+            new com.fathan.form.produk.Ubah_Produk(this, true).setVisible(true);
+            loadTableProduk();
+        }
+    }//GEN-LAST:event_button3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,7 +372,7 @@ public class produk extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -244,9 +388,11 @@ public class produk extends javax.swing.JFrame {
     private com.fathan.form.kategori.Button button3;
     private com.fathan.form.kategori.Button button4;
     private com.fathan.swing.jcombobox.Combobox combobox1;
+    private javax.swing.JTextField field_cari;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel label_emptyData;
     public javax.swing.JLabel label_ucapan;
     private com.fathan.swing.PanelBordeer panelBordeer1;
     private com.fathan.swing.PanelRound panelRound1;
