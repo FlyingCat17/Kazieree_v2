@@ -270,6 +270,9 @@
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableDark2MouseClicked"/>
                   </Events>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.fathan.swing.jtable.TableDark(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex)&#xa;    {&#xa;        return false; //Disallow the editing of any cell&#xa;    }&#xa;}"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
