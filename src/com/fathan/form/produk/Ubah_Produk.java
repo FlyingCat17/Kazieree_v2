@@ -31,8 +31,14 @@ public class Ubah_Produk extends javax.swing.JDialog {
         label_warning_np.setVisible(false);
         label_warning_s.setVisible(false);
         label_warning_hbhj.setVisible(false);
-        getKategori();
-        getData_produk();
+        System.out.println("Ambil Kategori : " + new com.fathan.form.produk.getdatabarang().getKategori());
+        if (new com.fathan.form.produk.getdatabarang().getKategori() == true) {
+            getData_produkJasa();
+            System.out.println("Produk Jasa Get in");
+        } else {
+            getData_produk();
+            System.out.println("Produk Barang Get in");
+        }
     }
 
     public void getKategori() {
@@ -52,6 +58,11 @@ public class Ubah_Produk extends javax.swing.JDialog {
     }
 
     public void getData_produk() {
+        field_kp.setEnabled(true);
+        field_s.setEnabled(true);
+        field_hb.setEnabled(true);
+        getKategori();
+        combobox1.setSelectedIndex(0);
         try {
             String data = "SELECT * FROM produk WHERE kode_produk = '" + new com.fathan.form.produk.getdatabarang().getKode_produk() + "'";
             String data2 = "SELECT nama_kategori FROM kategori JOIN produk\n"
@@ -70,10 +81,44 @@ public class Ubah_Produk extends javax.swing.JDialog {
                 field_hj.setText(rs.getString("harga_jual"));
             }
             if (rs2.next()) {
-                combobox1.setSelectedItem(rs.getString("nama_kategori").toString());
+                combobox1.setSelectedItem(rs2.getString("nama_kategori").toString());
+            }
+
+        } catch (Exception e) {
+            System.err.println("Get Data Produk : " + e.getMessage());
+        }
+    }
+
+    public void getData_produkJasa() {
+        field_kp.setEnabled(false);
+        field_s.setEnabled(false);
+        field_hb.setEnabled(false);
+        getKategori();
+        combobox1.setSelectedIndex(1);
+        try {
+            String load = "SELECT produk.kode_produk, produk.nama_produk, kategori.nama_kategori, produk.satuan, produk.harga_beli, produk.harga_jual FROM produk JOIN kategori ON produk.id_kategori = kategori.id_kategori\n"
+                    + "WHERE produk.kode_produk = '" + new com.fathan.form.produk.getdatabarang().getKode_produk() + "'";
+            String data2 = "SELECT nama_kategori FROM kategori JOIN produk\n"
+                    + "ON kategori.id_kategori = produk.id_kategori\n"
+                    + "WHERE produk.kode_produk = '" + new com.fathan.form.produk.getdatabarang().getKode_produk() + "'; ";
+            java.sql.Connection con = (Connection) configdb.GetConnection();
+            java.sql.Statement pst = con.createStatement();
+            java.sql.Statement pst1 = con.createStatement();
+            java.sql.ResultSet rs = pst.executeQuery(load);
+            java.sql.ResultSet rs2 = pst1.executeQuery(data2);
+            if (rs.next()) {
+                field_kp.setText(rs.getString("kode_produk"));
+                field_np.setText(rs.getString("nama_produk"));
+                field_s.setText(rs.getString("satuan"));
+                field_hb.setText(rs.getString("harga_beli"));
+                field_hj.setText(rs.getString("harga_jual"));
+
+            }
+            if (rs2.next()) {
+                combobox1.setSelectedItem(rs2.getString("nama_kategori").toString());
             }
         } catch (Exception e) {
-            System.err.println("Get Data Produk : "+e.getMessage());
+            System.err.println("Get Data Produk Jasa : " + e.getMessage());
         }
     }
 
@@ -182,6 +227,7 @@ public class Ubah_Produk extends javax.swing.JDialog {
         label_warning_hj.setText("Harga Jual Kosong!");
         panelBordeer1.add(label_warning_hj, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 130, 20));
 
+        combobox1.setEnabled(false);
         combobox1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         combobox1.setLabeText("Kategori");
         combobox1.addActionListener(new java.awt.event.ActionListener() {
@@ -378,9 +424,7 @@ public class Ubah_Produk extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
-    public void loadDataProduk() {
 
-    }
     private void field_kpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_kpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field_kpActionPerformed
@@ -448,7 +492,7 @@ public class Ubah_Produk extends javax.swing.JDialog {
         if (field_s.isEditable()) {
             label_warning_s.setVisible(false);
         }
-        if (field_s.getText().length() >= 8) {
+        if (field_s.getText().length() >= 6) {
             evt.consume();
         }
 
@@ -477,9 +521,16 @@ public class Ubah_Produk extends javax.swing.JDialog {
     }//GEN-LAST:event_field_hjActionPerformed
 
     private void field_hjKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hjKeyTyped
+        char k = evt.getKeyChar();
         if (field_hj.isEditable()) {
             label_warning_hj.setVisible(false);
             label_warning_hbhj.setVisible(false);
+        }
+        if (!(Character.isDigit(k) || k == KeyEvent.VK_BACK_SPACE || k == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+        if (field_hj.getText().length() >= 12) {
+            evt.consume();
         }
     }//GEN-LAST:event_field_hjKeyTyped
 
@@ -534,22 +585,19 @@ public class Ubah_Produk extends javax.swing.JDialog {
             field_hb.requestFocus();
         } else {
             try {
-                String tambahProduk = "INSERT INTO `produk`(`kode_produk`, `nama_produk`, `id_kategori`, `satuan`, `harga_beli`,\n"
-                        + "                     `harga_jual`) VALUES ('" + kp + "','" + np + "','" + label_warning_hj1.getText() + "','" + sp + "','" + hb + "','" + hj + "')";
-                String tambahstok = "INSERT INTO `stok`(`kode_produk`, `jumlah_stok`) VALUES ('" + kp + "','0')";
+                String UbahProduk = "UPDATE `produk` SET `kode_produk`='" + kp + "',`nama_produk`='" + np + "',`satuan`='" + sp + "',`harga_beli`='" + hb + "',`harga_jual`='" + hj + "' WHERE produk.kode_produk = '" + kp + "'";
                 con = (Connection) configdb.GetConnection();
-                pst = con.prepareStatement(tambahProduk);
-                pst1 = con.prepareStatement(tambahstok);
+                pst = con.prepareStatement(UbahProduk);
                 pst.execute();
-                pst1.execute();
                 label_warning_hbhj.setVisible(true);
                 label_warning_hbhj.setForeground(Color.GREEN);
-                label_warning_hbhj.setText("Data Berhasil Ditambahkan!");
-                field_kp.setText("");
-                field_np.setText("");
-                field_s.setText("");
-                field_hb.setText("");
-                field_hj.setText("");
+                label_warning_hbhj.setText("Data Berhasil Diubah!");
+                if (sp == "Jasa") {
+                    getData_produkJasa();
+                } else {
+                    getData_produk();
+                }
+
             } catch (Exception e) {
                 label_warning_hbhj.setVisible(true);
                 label_warning_hbhj.setForeground(Color.RED);
@@ -572,7 +620,7 @@ public class Ubah_Produk extends javax.swing.JDialog {
         } catch (Exception e) {
             System.err.println("Ambil Id Kategori : " + e.getMessage());
         }
-        if (combobox1.getSelectedIndex()==1) {
+        if (combobox1.getSelectedIndex() == 1) {
             System.out.println("INi jasa");
         }
     }//GEN-LAST:event_combobox1ActionPerformed
