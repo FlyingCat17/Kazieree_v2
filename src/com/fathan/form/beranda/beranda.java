@@ -64,6 +64,7 @@ public class beranda extends javax.swing.JFrame {
         button7 = new com.fathan.form.beranda.Button();
         panelBorderGradient11 = new com.fathan.swing.PanelBorderGradient1();
         panelBorderGradient21 = new com.fathan.swing.PanelBorderGradient2();
+        panelBorderGradient2 = new com.fathan.form.beranda.PanelBorderGradient();
         jLabel1 = new javax.swing.JLabel();
         panel_top = new com.fathan.swing.PanelRound();
         label_nama1 = new javax.swing.JLabel();
@@ -101,14 +102,14 @@ public class beranda extends javax.swing.JFrame {
         panelBorderGradient1.setLayout(panelBorderGradient1Layout);
         panelBorderGradient1Layout.setHorizontalGroup(
             panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
         panelBorderGradient1Layout.setVerticalGroup(
             panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelBorderGradient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        panel_top1.add(panelBorderGradient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 270, -1));
 
         jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -165,6 +166,11 @@ public class beranda extends javax.swing.JFrame {
         button7.setForeground(new java.awt.Color(255, 255, 255));
         button7.setText("Supplier");
         button7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button7ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 270, 50));
 
         panelBorderGradient11.setPreferredSize(new java.awt.Dimension(370, 150));
@@ -173,27 +179,40 @@ public class beranda extends javax.swing.JFrame {
         panelBorderGradient11.setLayout(panelBorderGradient11Layout);
         panelBorderGradient11Layout.setHorizontalGroup(
             panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
         panelBorderGradient11Layout.setVerticalGroup(
             panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelBorderGradient11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, 370, 150));
+        panel_top1.add(panelBorderGradient11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 280, 150));
 
         javax.swing.GroupLayout panelBorderGradient21Layout = new javax.swing.GroupLayout(panelBorderGradient21);
         panelBorderGradient21.setLayout(panelBorderGradient21Layout);
         panelBorderGradient21Layout.setHorizontalGroup(
             panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
         panelBorderGradient21Layout.setVerticalGroup(
             panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelBorderGradient21, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 30, 370, 150));
+        panel_top1.add(panelBorderGradient21, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 280, 150));
+
+        javax.swing.GroupLayout panelBorderGradient2Layout = new javax.swing.GroupLayout(panelBorderGradient2);
+        panelBorderGradient2.setLayout(panelBorderGradient2Layout);
+        panelBorderGradient2Layout.setHorizontalGroup(
+            panelBorderGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+        panelBorderGradient2Layout.setVerticalGroup(
+            panelBorderGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 150, Short.MAX_VALUE)
+        );
+
+        panel_top1.add(panelBorderGradient2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 30, 280, 150));
 
         panelBordeer1.add(panel_top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 1220, 490));
 
@@ -333,6 +352,25 @@ public class beranda extends javax.swing.JFrame {
         
     }//GEN-LAST:event_panel_top1MouseClicked
 
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        new com.fathan.form.supplier.supplier().setVisible(true);
+    }//GEN-LAST:event_button7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,6 +424,7 @@ public class beranda extends javax.swing.JFrame {
     private com.fathan.swing.PanelBordeer panelBordeer1;
     private com.fathan.swing.PanelBorderGradient panelBorderGradient1;
     private com.fathan.swing.PanelBorderGradient1 panelBorderGradient11;
+    private com.fathan.form.beranda.PanelBorderGradient panelBorderGradient2;
     private com.fathan.swing.PanelBorderGradient2 panelBorderGradient21;
     private com.fathan.swing.PanelRound panel_top;
     private com.fathan.swing.PanelRound panel_top1;

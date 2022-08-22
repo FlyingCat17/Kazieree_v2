@@ -47,10 +47,10 @@ public class TableDark extends JTable {
     public void fixTable(JScrollPane scroll) {
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(255,255,255));
+        panel.setBackground(new Color(255, 255, 255));
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
-        scroll.getViewport().setBackground(new Color(255,255,255));
-        scroll.setBorder(BorderFactory.createLineBorder(new Color(255,255,255), 2));
+        scroll.getViewport().setBackground(new Color(255, 255, 255));
+        scroll.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 2));
     }
 
     private class TableDarkHeader extends DefaultTableCellRenderer {
@@ -64,8 +64,8 @@ public class TableDark extends JTable {
         @Override
         public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
-            com.setBackground(new Color(255,255,255));
-            com.setForeground(new Color(0,0,0));
+            com.setBackground(new Color(255, 255, 255));
+            com.setForeground(new Color(0, 0, 0));
             com.setFont(com.getFont().deriveFont(Font.BOLD, 12));
             if (alignment.containsKey(i1)) {
                 setHorizontalAlignment(alignment.get(i1));
@@ -89,18 +89,20 @@ public class TableDark extends JTable {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, row, column);
             if (isCellSelected(row, column)) {
                 if (row % 2 == 0) {
-                    com.setBackground(new Color(33, 103, 153));
+                    com.setBackground(new Color(19, 179, 200));
+                    com.setForeground(new Color(255, 255, 255));
                 } else {
-                    com.setBackground(new Color(29, 86, 127));
+                    com.setBackground(new Color(19, 179, 200));
+                    com.setForeground(new Color(255, 255, 255));
                 }
             } else {
                 if (row % 2 == 0) {
-                    com.setBackground(new Color(247,248,252));
+                    com.setBackground(new Color(247, 248, 252));
                 } else {
-                    com.setBackground(new Color(255,255,255));
+                    com.setBackground(new Color(255, 255, 255));
                 }
             }
-            com.setForeground(new Color(0,0,0));
+            com.setForeground(new Color(0, 0, 0));
             setBorder(new EmptyBorder(0, 5, 0, 5));
             if (alignment.containsKey(column)) {
                 setHorizontalAlignment(alignment.get(column));

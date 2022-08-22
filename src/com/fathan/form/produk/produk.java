@@ -239,7 +239,12 @@ public class produk extends javax.swing.JFrame {
         button3 = new com.fathan.form.kategori.Button();
         combobox1 = new com.fathan.swing.jcombobox.Combobox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableDark2 = new com.fathan.swing.jtable.TableDark();
+        tableDark2 = new com.fathan.swing.jtable.TableDark(){
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jLabel1 = new javax.swing.JLabel();
         panel_top = new com.fathan.swing.PanelRound();
         label_ucapan = new javax.swing.JLabel();
