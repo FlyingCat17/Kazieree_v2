@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -421,7 +422,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
         if (field_s.isEditable()) {
             label_warning_s.setVisible(false);
         }
-        if (field_s.getText().length() >= 8) {
+        if (field_s.getText().length() >= 6) {
             evt.consume();
         }
 
@@ -450,11 +451,18 @@ public class Tambah_Produk extends javax.swing.JDialog {
     }//GEN-LAST:event_field_hjActionPerformed
 
     private void field_hjKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hjKeyTyped
+        char k = evt.getKeyChar();
         if (field_hj.isEditable()) {
             label_warning_hj.setVisible(false);
             label_warning_hbhj.setVisible(false);
         }
-        
+        if (!(Character.isDigit(k) || k == KeyEvent.VK_BACK_SPACE || k == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+        if (field_hj.getText().length() >= 12) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_field_hjKeyTyped
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
@@ -483,55 +491,112 @@ public class Tambah_Produk extends javax.swing.JDialog {
         sp = field_s.getText().toString();
         hb = field_hb.getText();
         hj = field_hj.getText();
-        if (kp.isEmpty()) {
-            label_warning_kp.setVisible(true);
-            label_warning_kp.setText("Kode Produk Kosong!");
-            field_kp.requestFocus();
-        } else if (np.isEmpty()) {
-            label_warning_np.setVisible(true);
-            label_warning_np.setText("Nama Produk Kosong!");
-            field_np.requestFocus();
-        } else if (sp.isEmpty()) {
-            label_warning_s.setVisible(true);
-            field_s.requestFocus();
-        } else if (hb.equals("")) {
-            label_warning_hb.setVisible(true);
-            field_hb.requestFocus();
-        } else if (hj.equals("")) {
-            label_warning_hj.setVisible(true);
-            field_hj.requestFocus();
-        } else if (Integer.parseInt(field_hb.getText()) > Integer.parseInt(field_hj.getText())) {
-            label_warning_hbhj.setVisible(true);
-            label_warning_hbhj.setForeground(Color.RED);
-            label_warning_hbhj.setText("Harga Beli Lebih Besar Dari Harga Jual!");
-            field_hb.requestFocus();
-        } else {
-            try {
-                String tambahProduk = "INSERT INTO `produk`(`kode_produk`, `nama_produk`, `id_kategori`, `satuan`, `harga_beli`,\n"
-                        + "                     `harga_jual`) VALUES ('" + kp + "','" + np + "','" + label_warning_hj1.getText() + "','" + sp + "','" + hb + "','" + hj + "')";
-                String tambahstok = "INSERT INTO `stok`(`kode_produk`, `jumlah_stok`) VALUES ('" + kp + "','0')";
-                con = (Connection) configdb.GetConnection();
-                pst = con.prepareStatement(tambahProduk);
-                pst1 = con.prepareStatement(tambahstok);
-                pst.execute();
-                pst1.execute();
-                label_warning_hbhj.setVisible(true);
-                label_warning_hbhj.setForeground(Color.GREEN);
-                label_warning_hbhj.setText("Data Berhasil Ditambahkan!");
-                field_kp.setText("");
-                field_np.setText("");
-                field_s.setText("");
-                field_hb.setText("");
-                field_hj.setText("");
-            } catch (Exception e) {
+        if (combobox1.getSelectedIndex() == 0) {
+            if (kp.isEmpty()) {
+                label_warning_kp.setVisible(true);
+                label_warning_kp.setText("Kode Produk Kosong!");
+                field_kp.requestFocus();
+            } else if (np.isEmpty()) {
+                label_warning_np.setVisible(true);
+                label_warning_np.setText("Nama Produk Kosong!");
+                field_np.requestFocus();
+            } else if (sp.isEmpty()) {
+                label_warning_s.setVisible(true);
+                field_s.requestFocus();
+            } else if (hb.equals("")) {
+                label_warning_hb.setVisible(true);
+                field_hb.requestFocus();
+            } else if (hj.equals("")) {
+                label_warning_hj.setVisible(true);
+                field_hj.requestFocus();
+            } else if (Integer.parseInt(field_hb.getText()) > Integer.parseInt(field_hj.getText())) {
                 label_warning_hbhj.setVisible(true);
                 label_warning_hbhj.setForeground(Color.RED);
-                label_warning_hbhj.setText("Data Gagal Ditambahkan!");
-                System.err.println("Input Data : " + e.getMessage());
+                label_warning_hbhj.setText("Harga Beli Lebih Besar Dari Harga Jual!");
+                field_hb.requestFocus();
+            } else {
+                try {
+                    String tambahProduk = "INSERT INTO `produk`(`kode_produk`, `nama_produk`, `id_kategori`, `satuan`, `harga_beli`,\n"
+                            + "`harga_jual`) VALUES ('" + kp + "','" + np + "','" + label_warning_hj1.getText() + "','" + sp + "','" + hb + "','" + hj + "')";
+                    String tambahstok = "INSERT INTO `stok`(`kode_produk`, `jumlah_stok`) VALUES ('" + kp + "','0')";
+                    con = (Connection) configdb.GetConnection();
+                    pst = con.prepareStatement(tambahProduk);
+                    pst1 = con.prepareStatement(tambahstok);
+                    pst.execute();
+                    pst1.execute();
+                    label_warning_hbhj.setVisible(true);
+                    label_warning_hbhj.setForeground(Color.GREEN);
+                    label_warning_hbhj.setText("Data Berhasil Ditambahkan!");
+                    field_kp.setText("");
+                    field_np.setText("");
+                    field_s.setText("");
+                    field_hb.setText("");
+                    field_hj.setText("");
+                } catch (Exception e) {
+                    label_warning_hbhj.setVisible(true);
+                    label_warning_hbhj.setForeground(Color.RED);
+                    label_warning_hbhj.setText("Data Gagal Ditambahkan!");
+                    System.err.println("Input Data : " + e.getMessage());
+                }
+            }
+        } else if (combobox1.getSelectedIndex() == 1) {
+            if (np.isEmpty()) {
+                label_warning_np.setVisible(true);
+                label_warning_np.setText("Nama Produk Kosong!");
+                field_np.requestFocus();
+            } else if (hj.equals("")) {
+                label_warning_hj.setVisible(true);
+                field_hj.requestFocus();
+            } else {
+                try {
+                    String tambahProduk = "INSERT INTO `produk`(`kode_produk`, `nama_produk`, `id_kategori`, `satuan`, `harga_beli`,\n"
+                            + "`harga_jual`) VALUES ('" + kp + "','" + np + "','" + label_warning_hj1.getText() + "','" + sp + "','0','" + hj + "')";
+                    con = (Connection) configdb.GetConnection();
+                    pst = con.prepareStatement(tambahProduk);
+                    pst.execute();
+                    label_warning_hbhj.setVisible(true);
+                    label_warning_hbhj.setForeground(Color.GREEN);
+                    label_warning_hbhj.setText("Data Berhasil Ditambahkan!");
+                    field_kp.setText("");
+                    field_np.setText("");
+                    field_s.setText("");
+                    field_hb.setText("");
+                    field_hj.setText("");
+                } catch (Exception e) {
+                    label_warning_hbhj.setVisible(true);
+                    label_warning_hbhj.setForeground(Color.RED);
+                    label_warning_hbhj.setText("Data Gagal Ditambahkan!");
+                    System.err.println("Input Data : " + e.getMessage());
+                }
             }
         }
-    }//GEN-LAST:event_button2ActionPerformed
 
+    }//GEN-LAST:event_button2ActionPerformed
+    public void autoKode() {
+        try {
+            String sql = "SELECT MAX(RIGHT(produk.kode_produk,3)) AS nomor FROM produk WHERE produk.satuan = 'Jasa'";
+            java.sql.Connection con = (Connection) configdb.GetConnection();
+            java.sql.Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            java.sql.ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                if (rs.first() == false) {
+                    field_kp.setText("JASA001");
+                } else {
+                    rs.last();
+                    int autoId = rs.getInt(1) + 1;
+                    String no = String.valueOf(autoId);
+                    int noLong = no.length();
+                    for (int i = 0; i < 3 - noLong; i++) {
+                        no = "0" + no;
+                    }
+                    field_kp.setText("JASA" + no);
+                    System.out.println(no);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
     private void combobox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobox1ActionPerformed
         try {
             String sql = "SELECT id_kategori FROM kategori WHERE nama_kategori = '" + combobox1.getSelectedItem().toString() + "';";
@@ -545,16 +610,22 @@ public class Tambah_Produk extends javax.swing.JDialog {
         } catch (Exception e) {
             System.err.println("Ambil Id Kategori : " + e.getMessage());
         }
-        if (combobox1.getSelectedIndex()==1) {
+        if (combobox1.getSelectedIndex() == 1) {
             field_s.setText("Jasa");
             field_s.setEnabled(false);
             field_hb.setEnabled(false);
             field_hb.setText("0");
+            autoKode();
+            field_kp.setEditable(false);
+            field_kp.setEnabled(false);
         } else {
             field_s.setText("");
             field_s.setEnabled(true);
             field_hb.setEnabled(true);
             field_hb.setText("");
+            field_kp.setEditable(true);
+            field_kp.setEnabled(true);
+            field_kp.setText("");
         }
     }//GEN-LAST:event_combobox1ActionPerformed
 
@@ -570,14 +641,14 @@ public class Tambah_Produk extends javax.swing.JDialog {
             System.out.println("Disabled");
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_field_hjKeyPressed
 
     private void field_sKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_sKeyPressed
         if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) {
             System.out.println("Disabled Satuan");
             evt.consume();
-        }        
+        }
     }//GEN-LAST:event_field_sKeyPressed
 
     private void field_hjKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hjKeyReleased

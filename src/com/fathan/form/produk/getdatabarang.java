@@ -15,6 +15,24 @@ import java.sql.Connection;
 public class getdatabarang {
 
     public static String kode_produk = null;
+    public static boolean kategori = false;
+    public static String nama_produk = null;
+
+    public static void setNama_produk(String nama_produk) {
+        getdatabarang.nama_produk = nama_produk;
+    }
+
+    public static String getNama_produk() {
+        return nama_produk;
+    }
+
+    public static boolean getKategori() {
+        return kategori;
+    }
+
+    public static void setKategori(boolean kategori) {
+        getdatabarang.kategori = kategori;
+    }
 
     public static String getKode_produk() {
         return kode_produk;
@@ -24,5 +42,4 @@ public class getdatabarang {
         getdatabarang.kode_produk = kode_produk;
     }
 
-    
 }
