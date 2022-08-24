@@ -10,8 +10,7 @@ import com.fathan.db.configdb;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -26,10 +25,56 @@ public class Tambah_Produk extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
-        
+        label_warning_kp.setVisible(false);
+        label_warning_kp1.setVisible(false);
     }
 
-    
+    public void cari(String key) {
+        if (field_kp.getText().equals("")) {
+            field_np.setText("");
+            field_s.setText("");
+            field_hp.setText("");
+            field_jumlah.setEnabled(false);
+            field_jumlah.setText("");
+            label_sisastok.setText("-");
+        } else {
+            try {
+                String sql = "SELECT produk.kode_produk,`nama_produk`,`id_kategori`,`satuan`,`harga_beli`,`harga_jual`, stok.jumlah_stok FROM produk LEFT JOIN stok\n"
+                        + "ON produk.kode_produk = stok.kode_produk\n"
+                        + "WHERE produk.kode_produk LIKE '" + key + "'";
+                java.sql.Connection conn = (Connection) configdb.GetConnection();
+                java.sql.Statement st = conn.createStatement();
+                java.sql.ResultSet rs = st.executeQuery(sql);
+                if (rs.next()) {
+                    if (rs.getString("jumlah_stok") == null) {
+                        field_np.setText(rs.getString("nama_produk"));
+                        field_s.setText(rs.getString("satuan"));
+                        field_hp.setText(rs.getString("harga_jual"));
+                        field_jumlah.setText("-");
+                        label_sisastok.setText("{jasa}");
+                    } else {
+                        field_np.setText(rs.getString("nama_produk"));
+                        field_s.setText(rs.getString("satuan"));
+                        field_hp.setText(rs.getString("harga_jual"));
+                        field_jumlah.setText("");
+                        field_jumlah.setEnabled(true);
+                        label_sisastok.setText(rs.getString("jumlah_stok"));
+                    }
+                } else {
+                    field_np.setText("");
+                    field_s.setText("");
+                    field_hp.setText("");
+                    field_jumlah.setEnabled(false);
+                    field_jumlah.setText("");
+                    label_sisastok.setText("-");
+                }
+
+            } catch (SQLException e) {
+                System.err.println("Get Data Produk [Tambah Produk] : " + e.getMessage());
+            }
+
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,17 +92,20 @@ public class Tambah_Produk extends javax.swing.JDialog {
         panelBordeer4 = new com.fathan.swing.PanelBordeer();
         field_s = new javax.swing.JTextField();
         panelBordeer5 = new com.fathan.swing.PanelBordeer();
-        field_hb = new javax.swing.JTextField();
+        field_hp = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         panelBordeer6 = new com.fathan.swing.PanelBordeer();
-        field_hj = new javax.swing.JTextField();
+        field_jumlah = new javax.swing.JTextField();
         button1 = new com.fathan.form.produk.Button();
         button2 = new com.fathan.form.produk.Button();
         jLabel3 = new javax.swing.JLabel();
         label_warning_kp1 = new javax.swing.JLabel();
         label_warning_kp = new javax.swing.JLabel();
+        button11 = new com.fathan.form.transaksijual.Button1();
+        label_sisastok = new javax.swing.JLabel();
+        label_warning_kp3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -107,23 +155,25 @@ public class Tambah_Produk extends javax.swing.JDialog {
         field_kp.setBackground(new java.awt.Color(226, 226, 226));
         field_kp.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
         field_kp.setBorder(null);
-        field_kp.setEnabled(false);
         field_kp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 field_kpActionPerformed(evt);
             }
         });
         field_kp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                field_kpKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 field_kpKeyTyped(evt);
             }
         });
-        panelBordeer2.add(field_kp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 410, 40));
+        panelBordeer2.add(field_kp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/produk/Barcode.png"))); // NOI18N
-        panelBordeer2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, 30, 20));
+        panelBordeer2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 30, 20));
 
-        panelBordeer1.add(panelBordeer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 490, 40));
+        panelBordeer1.add(panelBordeer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 390, 40));
 
         jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -164,24 +214,24 @@ public class Tambah_Produk extends javax.swing.JDialog {
         panelBordeer5.setForeground(new java.awt.Color(226, 226, 226));
         panelBordeer5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        field_hb.setBackground(new java.awt.Color(226, 226, 226));
-        field_hb.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        field_hb.setBorder(null);
-        field_hb.setEnabled(false);
-        field_hb.addActionListener(new java.awt.event.ActionListener() {
+        field_hp.setBackground(new java.awt.Color(226, 226, 226));
+        field_hp.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        field_hp.setBorder(null);
+        field_hp.setEnabled(false);
+        field_hp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_hbActionPerformed(evt);
+                field_hpActionPerformed(evt);
             }
         });
-        field_hb.addKeyListener(new java.awt.event.KeyAdapter() {
+        field_hp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                field_hbKeyPressed(evt);
+                field_hpKeyPressed(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                field_hbKeyTyped(evt);
+                field_hpKeyTyped(evt);
             }
         });
-        panelBordeer5.add(field_hb, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 120, 40));
+        panelBordeer5.add(field_hp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 120, 40));
 
         jLabel7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
@@ -205,26 +255,26 @@ public class Tambah_Produk extends javax.swing.JDialog {
         panelBordeer6.setForeground(new java.awt.Color(226, 226, 226));
         panelBordeer6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        field_hj.setBackground(new java.awt.Color(226, 226, 226));
-        field_hj.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        field_hj.setBorder(null);
-        field_hj.addActionListener(new java.awt.event.ActionListener() {
+        field_jumlah.setBackground(new java.awt.Color(226, 226, 226));
+        field_jumlah.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        field_jumlah.setBorder(null);
+        field_jumlah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                field_hjActionPerformed(evt);
+                field_jumlahActionPerformed(evt);
             }
         });
-        field_hj.addKeyListener(new java.awt.event.KeyAdapter() {
+        field_jumlah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                field_hjKeyPressed(evt);
+                field_jumlahKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                field_hjKeyReleased(evt);
+                field_jumlahKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                field_hjKeyTyped(evt);
+                field_jumlahKeyTyped(evt);
             }
         });
-        panelBordeer6.add(field_hj, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 40));
+        panelBordeer6.add(field_jumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 130, 40));
 
         panelBordeer1.add(panelBordeer6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 170, 40));
 
@@ -237,7 +287,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
                 button1ActionPerformed(evt);
             }
         });
-        panelBordeer1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 240, 40));
+        panelBordeer1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 240, 40));
 
         button2.setBackground(new java.awt.Color(19, 179, 200));
         button2.setForeground(new java.awt.Color(255, 255, 255));
@@ -248,7 +298,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
                 button2ActionPerformed(evt);
             }
         });
-        panelBordeer1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, 240, 40));
+        panelBordeer1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 240, 40));
 
         jLabel3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -265,7 +315,25 @@ public class Tambah_Produk extends javax.swing.JDialog {
         label_warning_kp.setText("Harap Pilih Produk !");
         panelBordeer1.add(label_warning_kp, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 370, 20));
 
-        getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 450));
+        button11.setBackground(new java.awt.Color(19, 179, 200));
+        button11.setForeground(new java.awt.Color(255, 255, 255));
+        button11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/transaksijual/icon_cari.png"))); // NOI18N
+        button11.setText("Cari");
+        button11.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
+        button11.setIconTextGap(5);
+        panelBordeer1.add(button11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 90, 40));
+
+        label_sisastok.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        label_sisastok.setForeground(new java.awt.Color(19, 179, 200));
+        label_sisastok.setText("20");
+        panelBordeer1.add(label_sisastok, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 120, 20));
+
+        label_warning_kp3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        label_warning_kp3.setForeground(new java.awt.Color(19, 179, 200));
+        label_warning_kp3.setText("Sisa Stok :");
+        panelBordeer1.add(label_warning_kp3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, 20));
+
+        getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 490));
 
         pack();
         setLocationRelativeTo(null);
@@ -291,27 +359,15 @@ public class Tambah_Produk extends javax.swing.JDialog {
 
     private void field_kpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_kpKeyTyped
         char k = evt.getKeyChar();
+        if (Character.isLowerCase(k)) {
+            evt.setKeyChar(Character.toUpperCase(k));
+        }
+//        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+//            
+//        }
         if (field_kp.isEditable()) {
             label_warning_kp.setVisible(false);
-            if (field_kp.getText().length() >= 45) {
-                button2.setBackground(new Color(128, 128, 128));
-                button2.setForeground(new Color(255, 255, 255));
-                button2.setEnabled(false);
-                label_warning_kp.setVisible(true);
-                label_warning_kp.setText("Kode Produk tidak boleh melebihi 45 Karakter !");
-            } else if (field_np.getText().length() >= 80) {
-                button2.setBackground(new Color(128, 128, 128));
-                button2.setForeground(new Color(255, 255, 255));
-                button2.setEnabled(false);
-                label_warning_kp.setVisible(false);
-            } else {
-                button2.setBackground(new Color(19, 179, 200));
-                button2.setForeground(new Color(255, 255, 255));
-                button2.setEnabled(true);
-                label_warning_kp.setVisible(false);
-            }
         }
-
 
     }//GEN-LAST:event_field_kpKeyTyped
 
@@ -320,7 +376,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
     }//GEN-LAST:event_field_npActionPerformed
 
     private void field_npKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_npKeyTyped
-        
+
     }//GEN-LAST:event_field_npKeyTyped
 
     private void field_sActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_sActionPerformed
@@ -336,40 +392,40 @@ public class Tambah_Produk extends javax.swing.JDialog {
 
     }//GEN-LAST:event_field_sKeyTyped
 
-    private void field_hbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_hbActionPerformed
+    private void field_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_hpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_field_hbActionPerformed
+    }//GEN-LAST:event_field_hpActionPerformed
 
-    private void field_hbKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hbKeyTyped
+    private void field_hpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hpKeyTyped
         char k = evt.getKeyChar();
-        if (field_hb.isEditable()) {
-            
+        if (field_hp.isEditable()) {
+
         }
         if (!(Character.isDigit(k) || k == KeyEvent.VK_BACK_SPACE || k == KeyEvent.VK_DELETE)) {
             evt.consume();
         }
-        if (field_hb.getText().length() >= 12) {
+        if (field_hp.getText().length() >= 12) {
             evt.consume();
         }
-    }//GEN-LAST:event_field_hbKeyTyped
+    }//GEN-LAST:event_field_hpKeyTyped
 
-    private void field_hjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_hjActionPerformed
+    private void field_jumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_jumlahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_field_hjActionPerformed
+    }//GEN-LAST:event_field_jumlahActionPerformed
 
-    private void field_hjKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hjKeyTyped
+    private void field_jumlahKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_jumlahKeyTyped
         char k = evt.getKeyChar();
-        if (field_hj.isEditable()) {
-            
+        if (field_jumlah.isEditable()) {
+
         }
         if (!(Character.isDigit(k) || k == KeyEvent.VK_BACK_SPACE || k == KeyEvent.VK_DELETE)) {
             evt.consume();
         }
-        if (field_hj.getText().length() >= 12) {
+        if (field_jumlah.getText().length() >= 12) {
             evt.consume();
         }
 
-    }//GEN-LAST:event_field_hjKeyTyped
+    }//GEN-LAST:event_field_jumlahKeyTyped
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         for (double i = 1.0; i >= 0.1; i = i - 0.25) {
@@ -389,25 +445,112 @@ public class Tambah_Produk extends javax.swing.JDialog {
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        
+        if (field_kp.getText().isEmpty()) {
+            label_warning_kp.setVisible(true);
+            label_warning_kp.setText("Tidak Ada Produk yang terpilih");
+            field_kp.requestFocus();
+        } else if (field_kp.getText().isEmpty()) {
+            label_warning_kp.setVisible(true);
+            label_warning_kp.setText("Tidak Ada Produk yang terpilih");
+            field_kp.requestFocus();
+        } else {
+            if (field_s.getText().equals("Jasa")) {
+                try {
+                    String insertFirstJasa = "INSERT INTO temp_jual VALUES('"+field_kp.getText()+"', '"+field_np.getText()+"', 1, "+field_hp.getText()+")\n"
+                            + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + 1;";
+                    java.sql.Connection con = (Connection) configdb.GetConnection();
+                    java.sql.Statement st = con.createStatement();
+                    st.execute(insertFirstJasa);
+                    for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+                        String val = i + "";
+                        float f = Float.valueOf(val);
+                        this.setOpacity(f);
+                        System.out.println(f);
+                        try {
+                            Thread.sleep(10);
+                            if (this.getOpacity() <= 0.25) {
+                                this.dispose();
+                            }
 
+                        } catch (Exception e) {
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Ada Gagal Input Jasa : " + e.getMessage());
+                }
+            } else {
+                try {
+//                    String insertFirstBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 0, '" + field_hp.getText() + "');";
+//                    String insertSecondBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 0, '" + field_hp.getText() + "')"
+//                            + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText());
+                    String insertFirstBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', " + Integer.parseInt(field_jumlah.getText()) + ", " + field_hp.getText() + ")\n"
+                            + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText()) + ";";
+                    String insertSecondBarang = "UPDATE stok SET stok.jumlah_stok = stok.jumlah_stok - " + Integer.parseInt(field_jumlah.getText()) + " WHERE stok.kode_produk = '" + field_kp.getText() + "';";
+                    java.sql.Connection con = (Connection) configdb.GetConnection();
+                    java.sql.Statement stt = con.createStatement();
+                    java.sql.Statement stt1 = con.createStatement();
+                    stt.execute(insertFirstBarang);
+                    stt1.execute(insertSecondBarang);
+                    for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+                        String val = i + "";
+                        float f = Float.valueOf(val);
+                        this.setOpacity(f);
+                        System.out.println(f);
+                        try {
+                            Thread.sleep(10);
+                            if (this.getOpacity() <= 0.25) {
+                                this.dispose();
+                            }
+
+                        } catch (Exception e) {
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("Ada Gagal Input Barang : " + e.getMessage());
+//                    try {
+//                        String insertSecondBarangg = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 0, '" + field_hp.getText() + "')"
+//                                + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText());
+//                        java.sql.Connection con1 = (Connection) configdb.GetConnection();
+//                        java.sql.Statement st2 = con1.createStatement();
+//                        st2.execute(insertSecondBarangg);
+//                        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+//                            String val = i + "";
+//                            float f = Float.valueOf(val);
+//                            this.setOpacity(f);
+//                            System.out.println(f);
+//                            try {
+//                                Thread.sleep(10);
+//                                if (this.getOpacity() <= 0.25) {
+//                                    this.dispose();
+//                                }
+//
+//                            } catch (Exception e1) {
+//
+//                            }
+//                        }
+//                    } catch (Exception ex) {
+//                        System.err.println("Ada Gagal Input Stok Barang : " + ex.getMessage());
+//                    }
+                }
+            }
+        }
     }//GEN-LAST:event_button2ActionPerformed
-   
-    
-    private void field_hbKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hbKeyPressed
+
+
+    private void field_hpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hpKeyPressed
         if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) {
             System.out.println("Disabled");
             evt.consume();
         }
-    }//GEN-LAST:event_field_hbKeyPressed
+    }//GEN-LAST:event_field_hpKeyPressed
 
-    private void field_hjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hjKeyPressed
+    private void field_jumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_jumlahKeyPressed
         if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) {
             System.out.println("Disabled");
             evt.consume();
         }
 
-    }//GEN-LAST:event_field_hjKeyPressed
+    }//GEN-LAST:event_field_jumlahKeyPressed
 
     private void field_sKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_sKeyPressed
         if (evt.isControlDown() && evt.getKeyCode() == KeyEvent.VK_V) {
@@ -416,9 +559,24 @@ public class Tambah_Produk extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_field_sKeyPressed
 
-    private void field_hjKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hjKeyReleased
+    private void field_jumlahKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_jumlahKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_field_hjKeyReleased
+    }//GEN-LAST:event_field_jumlahKeyReleased
+
+    private void field_kpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_kpKeyReleased
+        String key = field_kp.getText();
+
+        if (key != "") {
+            cari(key);
+        } else {
+            field_np.setText("");
+            field_s.setText("");
+            field_hp.setText("");
+            field_jumlah.setEnabled(false);
+            field_jumlah.setText("");
+            label_sisastok.setText("-");
+        }
+    }//GEN-LAST:event_field_kpKeyReleased
 
     /**
      * @param args the command line arguments
@@ -465,9 +623,10 @@ public class Tambah_Produk extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.fathan.form.produk.Button button1;
+    private com.fathan.form.transaksijual.Button1 button11;
     private com.fathan.form.produk.Button button2;
-    private javax.swing.JTextField field_hb;
-    private javax.swing.JTextField field_hj;
+    private javax.swing.JTextField field_hp;
+    private javax.swing.JTextField field_jumlah;
     private javax.swing.JTextField field_kp;
     private javax.swing.JTextField field_np;
     private javax.swing.JTextField field_s;
@@ -479,8 +638,10 @@ public class Tambah_Produk extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel label_sisastok;
     private javax.swing.JLabel label_warning_kp;
     private javax.swing.JLabel label_warning_kp1;
+    private javax.swing.JLabel label_warning_kp3;
     private com.fathan.swing.PanelBordeer panelBordeer1;
     private com.fathan.swing.PanelBordeer panelBordeer2;
     private com.fathan.swing.PanelBordeer panelBordeer3;
