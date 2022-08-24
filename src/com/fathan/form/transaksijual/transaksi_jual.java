@@ -10,14 +10,20 @@ import com.fathan.main.*;
 import com.fathan.db.configdb;
 import java.awt.Color;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,11 +40,11 @@ public class transaksi_jual extends javax.swing.JFrame {
     public transaksi_jual() {
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
-
         panel_top.setBackground(new Color(255, 255, 255, 240));
         panel_top1.setBackground(new Color(255, 255, 255, 230));
         keranjang_jual();
         gen_kodeTransaksi();
+        setJam();
     }
 
     public void keranjang_jual() {
@@ -50,10 +56,13 @@ public class transaksi_jual extends javax.swing.JFrame {
         model.addColumn("Total Harga");
         tableDark2.setModel(model);
         try {
-            String sql = "SELECT *, SUM(temp_jual.qty * temp_jual.harga_jual) AS Total FROM `temp_jual` ";
+            String sql = "SELECT *, SUM(temp_jual.qty * temp_jual.harga_jual) AS Total FROM `temp_jual` GROUP BY temp_jual.kode_produk ";
+            String totalHarga = "SELECT SUM(harga_jual*qty) As Totall FROM temp_jual";
             java.sql.Connection con = (Connection) configdb.GetConnection();
             java.sql.Statement st = con.createStatement();
+            java.sql.Statement st1 = con.createStatement();
             java.sql.ResultSet rs = st.executeQuery(sql);
+            java.sql.ResultSet rs1 = st1.executeQuery(totalHarga);
             while (rs.next()) {
                 model.addRow(new Object[]{
                     rs.getString(1),
@@ -71,9 +80,57 @@ public class transaksi_jual extends javax.swing.JFrame {
                 tableDark2.getColumnModel().getColumn(4).setPreferredWidth(50);
 
             }
+            int total_harga;
+            if (rs1.next()) {
+                if (rs1.getString("Totall") == null) {
+                    label_totalHarga.setText("Rp0");
+                } else {
+                    label_totalHarga.setText("Rp" + rs1.getString("Totall"));
+                    total_harga = Integer.parseInt(rs1.getString("Totall"));
+                    System.out.println("Total Harga Saat ini = " + total_harga);
+                }
+            }
         } catch (SQLException e) {
             System.err.println("Get Keranjang Jual " + e.getMessage());
         }
+    }
+
+    public void setJam() {
+        ActionListener taskPerformer = new ActionListener() {
+
+            public void actionPerformed(ActionEvent evt) {
+                String nol_jam = "", nol_menit = "", nol_detik = "";
+                java.text.SimpleDateFormat kal = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date dateTime = new java.util.Date();
+                int nilai_jam = dateTime.getHours();
+                int nilai_menit = dateTime.getMinutes();
+                int nilai_detik = dateTime.getSeconds();
+
+                if (nilai_jam <= 9) {
+                    nol_jam = "0";
+                }
+                if (nilai_menit <= 9) {
+                    nol_menit = "0";
+                }
+                if (nilai_detik <= 9) {
+                    nol_detik = "0";
+                }
+
+                String waktu = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                String tgl = kal.format(dateTime);
+
+                label_tanggalNow.setText(tgl + " " + waktu + ":" + menit + ":" + detik + "");
+            }
+        };
+        new Timer(1000, taskPerformer).start();
+    }
+
+    public void setTanggal() {
+        java.util.Date skrg = new java.util.Date();
+        java.text.SimpleDateFormat kal = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        jLabel1.setText(kal.format(skrg));
     }
 
     protected void gen_kodeTransaksi() {
@@ -123,10 +180,10 @@ public class transaksi_jual extends javax.swing.JFrame {
             }
         };
         button3 = new com.fathan.form.transaksijual.Button();
-        button2 = new com.fathan.form.transaksijual.Button();
         button1 = new com.fathan.form.transaksijual.Button();
         label_totalHarga = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        button5 = new com.fathan.form.transaksijual.Button();
         jLabel1 = new javax.swing.JLabel();
         panel_top = new com.fathan.swing.PanelRound();
         button4 = new com.fathan.form.kategori.Button();
@@ -197,16 +254,15 @@ public class transaksi_jual extends javax.swing.JFrame {
         button3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
         panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 150, 290, 40));
 
-        button2.setBackground(new java.awt.Color(255, 51, 51));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("Hapus Produk");
-        button2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
-        panel_top1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 90, 290, 40));
-
         button1.setBackground(new java.awt.Color(19, 179, 200));
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Tambah Produk");
         button1.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 290, 40));
 
         label_totalHarga.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 30)); // NOI18N
@@ -220,6 +276,17 @@ public class transaksi_jual extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Total Harga");
         panel_top1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 310, 170, -1));
+
+        button5.setBackground(new java.awt.Color(255, 51, 51));
+        button5.setForeground(new java.awt.Color(255, 255, 255));
+        button5.setText("Hapus Produk");
+        button5.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
+        panel_top1.add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 90, 290, 40));
 
         panelBordeer1.add(panel_top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 1220, 440));
 
@@ -332,8 +399,26 @@ public class transaksi_jual extends javax.swing.JFrame {
     }//GEN-LAST:event_button4ActionPerformed
 
     private void tableDark2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDark2MouseClicked
-
+        if (evt.getClickCount() == 1) {
+            int i = tableDark2.rowAtPoint(evt.getPoint());
+            new com.fathan.form.transaksijual.getKode_Produk().setKode_produk(tableDark2.getValueAt(i, 0).toString());
+            System.out.println("id produk : " + new com.fathan.form.transaksijual.getKode_Produk().getKode_produk());
+        }
     }//GEN-LAST:event_tableDark2MouseClicked
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        new com.fathan.form.transaksijual.Tambah_Produk(this, true).setVisible(true);
+        keranjang_jual();
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        if (new com.fathan.form.transaksijual.getKode_Produk().getKode_produk() == null) {
+            new com.fathan.form.transaksijual.option_kodebarangkosong(this, true).setVisible(true);
+        } else {
+            new com.fathan.form.transaksijual.Ubah_Produk(this, true).setVisible(true);
+            keranjang_jual();
+        }
+    }//GEN-LAST:event_button5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,9 +458,9 @@ public class transaksi_jual extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.fathan.form.transaksijual.Button button1;
-    private com.fathan.form.transaksijual.Button button2;
     private com.fathan.form.transaksijual.Button button3;
     private com.fathan.form.kategori.Button button4;
+    private com.fathan.form.transaksijual.Button button5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

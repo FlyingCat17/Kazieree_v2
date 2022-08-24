@@ -66,7 +66,7 @@ public class option_hapus_yes extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Data Produk Berhasil Terhapus!");
+        jLabel3.setText("Produk Berhasil Terhapus!");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 470, 30));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
