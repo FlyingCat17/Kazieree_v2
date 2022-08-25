@@ -118,7 +118,7 @@ public class Bayar extends javax.swing.JDialog {
         panelBordeer1.setForeground(new java.awt.Color(255, 255, 255));
         panelBordeer1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel1.setText("-");
@@ -351,8 +351,9 @@ public class Bayar extends javax.swing.JDialog {
                             + "VALUES ('" + field_kodeTransaksi.getText() + "','" + kode_produk + "','" + nama_produk + "','" + harga_jual + "','" + qty + "','" + hargaKaliQty + "')";
                     java.sql.Statement st1 = con.createStatement();
                     st1.execute(sqll);
-                    JOptionPane.showMessageDialog(this, "Sudah berhasil Tersimpan !");
+                    
                 }
+                JOptionPane.showMessageDialog(this, "Sudah berhasil Tersimpan !");
                 try {
                     String sqlll = "TRUNCATE TABLE temp_jual";
                     java.sql.Statement st2 = con.createStatement();
