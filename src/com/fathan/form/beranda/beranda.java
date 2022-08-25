@@ -55,8 +55,8 @@ public class beranda extends javax.swing.JFrame {
         panel_top1 = new com.fathan.swing.PanelRound();
         panelBorderGradient1 = new com.fathan.swing.PanelBorderGradient();
         jLabel2 = new javax.swing.JLabel();
+        button8 = new com.fathan.form.beranda.Button();
         button1 = new com.fathan.form.beranda.Button();
-        button2 = new com.fathan.form.beranda.Button();
         button3 = new com.fathan.form.beranda.Button();
         button4 = new com.fathan.form.beranda.Button();
         button5 = new com.fathan.form.beranda.Button();
@@ -102,22 +102,32 @@ public class beranda extends javax.swing.JFrame {
         panelBorderGradient1.setLayout(panelBorderGradient1Layout);
         panelBorderGradient1Layout.setHorizontalGroup(
             panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 270, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelBorderGradient1Layout.setVerticalGroup(
             panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelBorderGradient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 270, -1));
+        panel_top1.add(panelBorderGradient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 270, 150));
 
         jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Daftar Menu");
         panel_top1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 475, 60));
 
+        button8.setForeground(new java.awt.Color(19, 179, 200));
+        button8.setText("Transaksi Beli");
+        button8.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button8ActionPerformed(evt);
+            }
+        });
+        panel_top1.add(button8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 270, 50));
+
         button1.setForeground(new java.awt.Color(19, 179, 200));
-        button1.setText("Transaksi");
+        button1.setText("Transaksi Jual");
         button1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,16 +135,6 @@ public class beranda extends javax.swing.JFrame {
             }
         });
         panel_top1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, 280, 50));
-
-        button2.setForeground(new java.awt.Color(19, 179, 200));
-        button2.setText("Kategori");
-        button2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        button2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
-            }
-        });
-        panel_top1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 270, 50));
 
         button3.setForeground(new java.awt.Color(19, 179, 200));
         button3.setText("Produk");
@@ -144,7 +144,7 @@ public class beranda extends javax.swing.JFrame {
                 button3ActionPerformed(evt);
             }
         });
-        panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 270, 50));
+        panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 270, 50));
 
         button4.setForeground(new java.awt.Color(19, 179, 200));
         button4.setText("Pengguna");
@@ -169,7 +169,7 @@ public class beranda extends javax.swing.JFrame {
                 button7ActionPerformed(evt);
             }
         });
-        panel_top1.add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 270, 50));
+        panel_top1.add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 270, 50));
 
         panelBorderGradient11.setPreferredSize(new java.awt.Dimension(370, 150));
 
@@ -177,11 +177,11 @@ public class beranda extends javax.swing.JFrame {
         panelBorderGradient11.setLayout(panelBorderGradient11Layout);
         panelBorderGradient11Layout.setHorizontalGroup(
             panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelBorderGradient11Layout.setVerticalGroup(
             panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panel_top1.add(panelBorderGradient11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 280, 150));
@@ -190,11 +190,11 @@ public class beranda extends javax.swing.JFrame {
         panelBorderGradient21.setLayout(panelBorderGradient21Layout);
         panelBorderGradient21Layout.setHorizontalGroup(
             panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelBorderGradient21Layout.setVerticalGroup(
             panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panel_top1.add(panelBorderGradient21, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 280, 150));
@@ -203,11 +203,11 @@ public class beranda extends javax.swing.JFrame {
         panelBorderGradient2.setLayout(panelBorderGradient2Layout);
         panelBorderGradient2Layout.setHorizontalGroup(
             panelBorderGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelBorderGradient2Layout.setVerticalGroup(
             panelBorderGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         panel_top1.add(panelBorderGradient2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 30, 280, 150));
@@ -277,25 +277,6 @@ public class beranda extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_formWindowOpened
-
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
-            String val = i + "";
-            float f = Float.valueOf(val);
-            this.setOpacity(f);
-            System.out.println(f);
-            try {
-                Thread.sleep(1);
-                if (this.getOpacity() <= 0.25) {
-                    this.dispose();
-                }
-                
-            } catch (Exception e) {
-            }
-            
-        }
-        new com.fathan.form.kategori.kategori().setVisible(true);
-    }//GEN-LAST:event_button2ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         for (double i = 1.0; i >= 0.1; i = i - 0.25) {
@@ -388,6 +369,25 @@ public class beranda extends javax.swing.JFrame {
         new com.fathan.form.transaksijual.transaksi_jual().setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
 
+    private void button8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button8ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        new com.fathan.form.transaksibeli.transaksi_beli().setVisible(true);
+    }//GEN-LAST:event_button8ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -426,12 +426,12 @@ public class beranda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.fathan.form.beranda.Button button1;
-    private com.fathan.form.beranda.Button button2;
     private com.fathan.form.beranda.Button button3;
     private com.fathan.form.beranda.Button button4;
     private com.fathan.form.beranda.Button button5;
     private com.fathan.form.beranda.Button button6;
     private com.fathan.form.beranda.Button button7;
+    private com.fathan.form.beranda.Button button8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

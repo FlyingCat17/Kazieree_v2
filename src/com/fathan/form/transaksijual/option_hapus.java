@@ -39,7 +39,6 @@ public class option_hapus extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         button2 = new com.fathan.form.produk.Button();
         button1 = new com.fathan.form.produk.Button();
-        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,7 +66,7 @@ public class option_hapus extends javax.swing.JDialog {
                 button2ActionPerformed(evt);
             }
         });
-        jPanel1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 90, 30));
+        jPanel1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 90, 30));
 
         button1.setForeground(new java.awt.Color(51, 51, 51));
         button1.setText("Batal");
@@ -77,13 +76,7 @@ public class option_hapus extends javax.swing.JDialog {
                 button1ActionPerformed(evt);
             }
         });
-        jPanel1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 90, 30));
-
-        jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Produk : Baygon 0,3AE");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 470, 40));
+        jPanel1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 90, 30));
 
         jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -217,7 +210,6 @@ public class option_hapus extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

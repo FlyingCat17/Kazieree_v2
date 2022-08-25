@@ -77,17 +77,17 @@ public class option_hapus extends javax.swing.JDialog {
         });
         jPanel1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 90, 30));
 
-        jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Produk : Baygon 0,3AE");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 470, 40));
+        jLabel4.setText("Produk : ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 490, 40));
 
         jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Yakin Ingin Menghapus Data Produk Ini?");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 490, 40));
+        jLabel3.setText("Yakin Ingin Menghapus Produk Ini?");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 490, 40));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/produk/icon_ask.png"))); // NOI18N
