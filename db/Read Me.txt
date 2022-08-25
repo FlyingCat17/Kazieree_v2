@@ -1,0 +1,3 @@
+Import terlebih dahulu database nya
+
+nama database sesuai codingan nya yaitu "kasir"
