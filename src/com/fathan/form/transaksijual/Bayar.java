@@ -7,9 +7,15 @@ package com.fathan.form.transaksijual;
 
 import com.fathan.db.configdb;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,11 +31,13 @@ public class Bayar extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
-        
+        field_kodeTransaksi.setText(new com.fathan.form.transaksijual.getKode_Produk().getKode_transaksi());
         loadDetailData();
+        label_warningNoMoney.setVisible(false);
     }
 
     int total_hargaa;
+
     public void loadDetailData() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Kode Produk");
@@ -59,7 +67,9 @@ public class Bayar extends javax.swing.JDialog {
                 });
             }
             if (rs1.next()) {
-                label_totalHarga.setText("Rp"+rs1.getString("Totall"));
+                label_totalHarga.setText("Rp" + rs1.getString("Totall"));
+                total_hargaa = rs1.getInt(1);
+                System.out.println("Total Harga : " + total_hargaa);
             }
         } catch (Exception e) {
             System.err.println("Detail Info : " + e.getMessage());
@@ -88,10 +98,11 @@ public class Bayar extends javax.swing.JDialog {
         panelBorderGradient31 = new com.fathan.swing.PanelBorderGradient3();
         jLabel3 = new javax.swing.JLabel();
         label_totalHarga = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        label_warningNoMoney = new javax.swing.JLabel();
+        field_kodeTransaksi = new javax.swing.JLabel();
+        field_kemabalian = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -110,7 +121,7 @@ public class Bayar extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel1.setText("Fathan Maulana");
+        jLabel1.setText("-");
         panelBordeer1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 250, 20));
 
         panelBordeer5.setBackground(new java.awt.Color(255, 255, 255));
@@ -120,7 +131,6 @@ public class Bayar extends javax.swing.JDialog {
         field_hp.setBackground(new java.awt.Color(226, 226, 226));
         field_hp.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
         field_hp.setBorder(null);
-        field_hp.setEnabled(false);
         field_hp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 field_hpActionPerformed(evt);
@@ -129,6 +139,9 @@ public class Bayar extends javax.swing.JDialog {
         field_hp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 field_hpKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                field_hpKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 field_hpKeyTyped(evt);
@@ -158,18 +171,19 @@ public class Bayar extends javax.swing.JDialog {
                 button1ActionPerformed(evt);
             }
         });
-        panelBordeer1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 240, 40));
+        panelBordeer1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 240, 40));
 
-        button2.setBackground(new java.awt.Color(19, 179, 200));
+        button2.setBackground(new java.awt.Color(102, 102, 102));
         button2.setForeground(new java.awt.Color(255, 255, 255));
         button2.setText("SIMPAN");
+        button2.setEnabled(false);
         button2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button2ActionPerformed(evt);
             }
         });
-        panelBordeer1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 240, 40));
+        panelBordeer1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, 240, 40));
 
         jScrollPane2.setBorder(null);
 
@@ -208,33 +222,38 @@ public class Bayar extends javax.swing.JDialog {
         label_totalHarga.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 30)); // NOI18N
         label_totalHarga.setForeground(new java.awt.Color(255, 255, 255));
         label_totalHarga.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        label_totalHarga.setText("Rp200000");
+        label_totalHarga.setText("Rp0");
         panelBorderGradient31.add(label_totalHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 330, 50));
 
         panelBordeer1.add(panelBorderGradient31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 490, 90));
 
-        jLabel10.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel10.setText("Nominal Bayar");
-        panelBordeer1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 170, -1));
+        label_warningNoMoney.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        label_warningNoMoney.setForeground(new java.awt.Color(255, 51, 51));
+        label_warningNoMoney.setText("Harap isi nominal pembayaran !");
+        panelBordeer1.add(label_warningNoMoney, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 200, -1));
 
-        jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("TJ/20220823/000001");
-        panelBordeer1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 240, -1));
+        field_kodeTransaksi.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        field_kodeTransaksi.setForeground(new java.awt.Color(102, 102, 102));
+        field_kodeTransaksi.setText("-");
+        panelBordeer1.add(field_kodeTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 240, -1));
 
-        jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel2.setText("Rp200000");
-        jLabel2.setToolTipText("");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        panelBordeer1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 210, 50));
+        field_kemabalian.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
+        field_kemabalian.setForeground(new java.awt.Color(51, 51, 51));
+        field_kemabalian.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        field_kemabalian.setText("0");
+        field_kemabalian.setToolTipText("");
+        field_kemabalian.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        panelBordeer1.add(field_kemabalian, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, 210, 50));
 
         jLabel5.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 25)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Detail Pembayaran");
         panelBordeer1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 260, 50));
+
+        jLabel11.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel11.setText("Nominal Bayar");
+        panelBordeer1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 170, -1));
 
         getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 600));
 
@@ -247,7 +266,6 @@ public class Bayar extends javax.swing.JDialog {
             String val = i + "";
             float f = Float.valueOf(val);
             this.setOpacity(f);
-            System.out.println(f);
             try {
                 Thread.sleep(19);
             } catch (Exception e) {
@@ -256,6 +274,26 @@ public class Bayar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    public void kembalian() {
+        if (!(field_hp.getText().equals(""))) {
+            int sub = total_hargaa;
+            int disk = Integer.parseInt(field_hp.getText());
+            int ttl = disk - sub;
+            if (!(ttl < 0)) {
+                field_kemabalian.setText("Rp" + Integer.toString(ttl));
+                button2.setEnabled(true);
+                button2.setBackground(new Color(19, 179, 200));
+                button2.setForeground(Color.WHITE);
+            } else {
+                field_kemabalian.setText("0");
+                button2.setEnabled(false);
+                button2.setBackground(new Color(102, 102, 102));
+                button2.setForeground(Color.WHITE);
+            }
+        } else {
+            field_kemabalian.setText("0");
+        }
+    }
     private void field_hpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_hpActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_field_hpActionPerformed
@@ -278,7 +316,6 @@ public class Bayar extends javax.swing.JDialog {
             String val = i + "";
             float f = Float.valueOf(val);
             this.setOpacity(f);
-            System.out.println(f);
             try {
                 Thread.sleep(10);
                 if (this.getOpacity() <= 0.25) {
@@ -290,8 +327,59 @@ public class Bayar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_button1ActionPerformed
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
 
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        Date todayNow = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DefaultTableModel model = (DefaultTableModel) tableDark2.getModel();
+        int jumlah_baris = tableDark2.getRowCount();
+        System.out.println("Jumlah Baris yang akan diinput : " + jumlah_baris);
+        try {
+            String sql = "INSERT INTO `jual`(`kode_transaksi`, `tgl_transaksi`, `id_pengguna`, `id_cashbox`, `total_harga`, `nominal_bayar`) "
+                    + "VALUES ('" + field_kodeTransaksi.getText() + "','" + sdf.format(todayNow).toString() + "','" + new com.fathan.user.user().getId_pengguna() + "','1','" + total_hargaa + "','" + field_hp.getText() + "')";
+            java.sql.Connection con = (Connection) configdb.GetConnection();
+            java.sql.Statement st = con.createStatement();
+            st.execute(sql);
+            try {
+                for (int i = 0; i < jumlah_baris; i++) {
+                    String kode_produk = (String) model.getValueAt(i, 0).toString();
+                    String nama_produk = (String) model.getValueAt(i, 1).toString();
+                    String qty = (String) model.getValueAt(i, 2).toString();
+                    String harga_jual = (String) model.getValueAt(i, 3).toString();
+                    String hargaKaliQty = (String) model.getValueAt(i, 4).toString();
+                    String sqll = "INSERT INTO `detail_jual`(`kode_transaksi`, `kode_produk`, `nama_produk`, `harga_jual`, `qty`, `total_harga`) "
+                            + "VALUES ('" + field_kodeTransaksi.getText() + "','" + kode_produk + "','" + nama_produk + "','" + harga_jual + "','" + qty + "','" + hargaKaliQty + "')";
+                    java.sql.Statement st1 = con.createStatement();
+                    st1.execute(sqll);
+                    JOptionPane.showMessageDialog(this, "Sudah berhasil Tersimpan !");
+                }
+                try {
+                    String sqlll = "TRUNCATE TABLE temp_jual";
+                    java.sql.Statement st2 = con.createStatement();
+                    st2.execute(sqlll);
+                    JOptionPane.showMessageDialog(this, "Keranjang Berhasil di reset");
+                    for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+                        String val = i + "";
+                        float f = Float.valueOf(val);
+                        this.setOpacity(f);
+                        try {
+                            Thread.sleep(10);
+                            if (this.getOpacity() <= 0.25) {
+                                this.dispose();
+                            }
+
+                        } catch (Exception e) {
+                        }
+                    }
+                } catch (Exception exx) {
+                    System.err.println("Empty of Keranjang Table : " + exx.getMessage());
+                }
+            } catch (Exception ex) {
+                System.err.println("Input at Detail Jual : " + ex.getMessage());
+            }
+        } catch (Exception e) {
+            System.err.println("Input at Jual : " + e.getMessage());
+        }
     }//GEN-LAST:event_button2ActionPerformed
 
 
@@ -304,11 +392,21 @@ public class Bayar extends javax.swing.JDialog {
 
     private void tableDark2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDark2MouseClicked
         if (evt.getClickCount() == 1) {
-            int i = tableDark2.rowAtPoint(evt.getPoint());
-            new com.fathan.form.transaksijual.getKode_Produk().setKode_produk(tableDark2.getValueAt(i, 0).toString());
-            System.out.println("id produk : " + new com.fathan.form.transaksijual.getKode_Produk().getKode_produk());
+
         }
     }//GEN-LAST:event_tableDark2MouseClicked
+
+    private void field_hpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_hpKeyReleased
+        if (!(field_kemabalian.getText().isEmpty())) {
+            kembalian();
+        } else {
+            field_kemabalian.setText("Rp-");
+            button2.setEnabled(false);
+            button2.setBackground(new Color(102, 102, 102));
+            button2.setForeground(Color.WHITE);
+        }
+
+    }//GEN-LAST:event_field_hpKeyReleased
 
     /**
      * @param args the command line arguments
@@ -359,16 +457,17 @@ public class Bayar extends javax.swing.JDialog {
     private com.fathan.form.produk.Button button1;
     private com.fathan.form.produk.Button button2;
     private javax.swing.JTextField field_hp;
+    private javax.swing.JLabel field_kemabalian;
+    private javax.swing.JLabel field_kodeTransaksi;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label_totalHarga;
+    private javax.swing.JLabel label_warningNoMoney;
     private com.fathan.swing.PanelBordeer panelBordeer1;
     private com.fathan.swing.PanelBordeer panelBordeer5;
     private com.fathan.swing.PanelBorderGradient3 panelBorderGradient31;
