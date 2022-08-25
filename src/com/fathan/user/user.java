@@ -13,7 +13,7 @@ public class user {
     public static String nama;
     public static String id_pengguna;
     public static String role;
-    public static String nama_lengkap;
+    public static String nama_lengkap = null;
     
     public static String getNama() {
         return nama;

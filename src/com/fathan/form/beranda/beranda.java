@@ -29,7 +29,7 @@ public class beranda extends javax.swing.JFrame {
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
         panel_top.setBackground(new Color(255, 255, 255, 240));
-        panel_top1.setBackground(new Color(255, 255, 255, 230));
+        panel_top1.setBackground(new Color(255, 255, 255, 100));
         if (usr.getNama() == null) {
             label_ucapan.setText("Selamat Datang, fulan");
             label_nama.setText("nothing else");
@@ -116,14 +116,17 @@ public class beranda extends javax.swing.JFrame {
         jLabel2.setText("Daftar Menu");
         panel_top1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 475, 60));
 
-        button1.setBackground(new java.awt.Color(75, 201, 217));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
+        button1.setForeground(new java.awt.Color(19, 179, 200));
         button1.setText("Transaksi");
         button1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, 280, 50));
 
-        button2.setBackground(new java.awt.Color(75, 201, 217));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
+        button2.setForeground(new java.awt.Color(19, 179, 200));
         button2.setText("Kategori");
         button2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         button2.addActionListener(new java.awt.event.ActionListener() {
@@ -133,8 +136,7 @@ public class beranda extends javax.swing.JFrame {
         });
         panel_top1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 270, 50));
 
-        button3.setBackground(new java.awt.Color(75, 201, 217));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
+        button3.setForeground(new java.awt.Color(19, 179, 200));
         button3.setText("Produk");
         button3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         button3.addActionListener(new java.awt.event.ActionListener() {
@@ -144,26 +146,22 @@ public class beranda extends javax.swing.JFrame {
         });
         panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 270, 50));
 
-        button4.setBackground(new java.awt.Color(75, 201, 217));
-        button4.setForeground(new java.awt.Color(255, 255, 255));
+        button4.setForeground(new java.awt.Color(19, 179, 200));
         button4.setText("Pengguna");
         button4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         panel_top1.add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 270, 50));
 
-        button5.setBackground(new java.awt.Color(75, 201, 217));
-        button5.setForeground(new java.awt.Color(255, 255, 255));
+        button5.setForeground(new java.awt.Color(19, 179, 200));
         button5.setText("Laporan");
         button5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         panel_top1.add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 270, 50));
 
-        button6.setBackground(new java.awt.Color(75, 201, 217));
-        button6.setForeground(new java.awt.Color(255, 255, 255));
+        button6.setForeground(new java.awt.Color(19, 179, 200));
         button6.setText("Riwayat Transaksi");
         button6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         panel_top1.add(button6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 270, 50));
 
-        button7.setBackground(new java.awt.Color(75, 201, 217));
-        button7.setForeground(new java.awt.Color(255, 255, 255));
+        button7.setForeground(new java.awt.Color(19, 179, 200));
         button7.setText("Supplier");
         button7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         button7.addActionListener(new java.awt.event.ActionListener() {
@@ -370,6 +368,25 @@ public class beranda extends javax.swing.JFrame {
         }
         new com.fathan.form.supplier.supplier().setVisible(true);
     }//GEN-LAST:event_button7ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+                
+            } catch (Exception e) {
+            }
+            
+        }
+        new com.fathan.form.transaksijual.transaksi_jual().setVisible(true);
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments

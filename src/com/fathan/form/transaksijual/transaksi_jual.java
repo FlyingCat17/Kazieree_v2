@@ -5,24 +5,16 @@
  */
 package com.fathan.form.transaksijual;
 
-import com.fathan.form.beranda.*;
-import com.fathan.main.*;
 import com.fathan.db.configdb;
 import java.awt.Color;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,6 +37,12 @@ public class transaksi_jual extends javax.swing.JFrame {
         keranjang_jual();
         gen_kodeTransaksi();
         setJam();
+        if (!(new com.fathan.user.user().getNama_lengkap()==null)) {
+            this.label_namaLengkap.setText(new com.fathan.user.user().getNama_lengkap());
+        } else {
+            this.label_namaLengkap.setText(null);
+        }
+       
     }
 
     public void keranjang_jual() {
@@ -159,6 +157,7 @@ public class transaksi_jual extends javax.swing.JFrame {
                     label_kodeTransaksi.setText("TJ/" + blnth + "/" + no);
                     System.out.println("TJ/" + blnth + "/" + no);
                     label_tanggalNow.setText(a);
+                    new com.fathan.form.transaksijual.getKode_Produk().setKode_transaksi("TJ/" + blnth + "/" + no);
                 }
             }
         } catch (Exception e) {
@@ -191,7 +190,7 @@ public class transaksi_jual extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         label_tanggalNow = new javax.swing.JLabel();
         panelBorderGradient1 = new com.fathan.form.transaksijual.PanelBorderGradient();
-        jLabel6 = new javax.swing.JLabel();
+        label_namaLengkap = new javax.swing.JLabel();
         label_kodeTransaksi = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -252,6 +251,11 @@ public class transaksi_jual extends javax.swing.JFrame {
         button3.setForeground(new java.awt.Color(255, 255, 255));
         button3.setText("Simpan & Bayar");
         button3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 150, 290, 40));
 
         button1.setBackground(new java.awt.Color(19, 179, 200));
@@ -334,11 +338,11 @@ public class transaksi_jual extends javax.swing.JFrame {
 
         panelBorderGradient1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel6.setText("Fathan Maulana");
-        panelBorderGradient1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 330, 70));
+        label_namaLengkap.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
+        label_namaLengkap.setForeground(new java.awt.Color(255, 255, 255));
+        label_namaLengkap.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        label_namaLengkap.setText("Fathan Maulana");
+        panelBorderGradient1.add(label_namaLengkap, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 330, 70));
 
         label_kodeTransaksi.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
         label_kodeTransaksi.setForeground(new java.awt.Color(255, 255, 255));
@@ -420,6 +424,18 @@ public class transaksi_jual extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button5ActionPerformed
 
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        if (tableDark2.getRowCount()<=0) {
+            new com.fathan.form.transaksijual.option_produkKosong(this, true).setVisible(true);
+            keranjang_jual();
+        } else {
+            System.out.println("Pembayaran pada Kode Transaksi : " + new com.fathan.form.transaksijual.getKode_Produk().getKode_transaksi());
+            new com.fathan.form.transaksijual.Bayar(this, true).setVisible(true);
+            keranjang_jual();
+            gen_kodeTransaksi();
+        }
+    }//GEN-LAST:event_button3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -464,10 +480,10 @@ public class transaksi_jual extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label_kodeTransaksi;
+    private javax.swing.JLabel label_namaLengkap;
     private javax.swing.JLabel label_tanggalNow;
     private javax.swing.JLabel label_totalHarga;
     public javax.swing.JLabel label_ucapan;

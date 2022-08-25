@@ -171,9 +171,9 @@ public class Tambah_Produk extends javax.swing.JDialog {
         panelBordeer2.add(field_kp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 320, 40));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/produk/Barcode.png"))); // NOI18N
-        panelBordeer2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 30, 20));
+        panelBordeer2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 30, 20));
 
-        panelBordeer1.add(panelBordeer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 390, 40));
+        panelBordeer1.add(panelBordeer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 380, 40));
 
         jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
@@ -321,11 +321,16 @@ public class Tambah_Produk extends javax.swing.JDialog {
         button11.setText("Cari");
         button11.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
         button11.setIconTextGap(5);
+        button11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button11ActionPerformed(evt);
+            }
+        });
         panelBordeer1.add(button11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 90, 40));
 
         label_sisastok.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         label_sisastok.setForeground(new java.awt.Color(19, 179, 200));
-        label_sisastok.setText("20");
+        label_sisastok.setText("-");
         panelBordeer1.add(label_sisastok, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 120, 20));
 
         label_warning_kp3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
@@ -416,7 +421,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
     private void field_jumlahKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_jumlahKeyTyped
         char k = evt.getKeyChar();
         if (field_jumlah.isEditable()) {
-
+            label_warning_kp1.setVisible(false);
         }
         if (!(Character.isDigit(k) || k == KeyEvent.VK_BACK_SPACE || k == KeyEvent.VK_DELETE)) {
             evt.consume();
@@ -445,6 +450,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        
         if (field_kp.getText().isEmpty()) {
             label_warning_kp.setVisible(true);
             label_warning_kp.setText("Tidak Ada Produk yang terpilih");
@@ -456,7 +462,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
         } else {
             if (field_s.getText().equals("Jasa")) {
                 try {
-                    String insertFirstJasa = "INSERT INTO temp_jual VALUES('"+field_kp.getText()+"', '"+field_np.getText()+"', 1, "+field_hp.getText()+")\n"
+                    String insertFirstJasa = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 1, " + field_hp.getText() + ")\n"
                             + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + 1;";
                     java.sql.Connection con = (Connection) configdb.GetConnection();
                     java.sql.Statement st = con.createStatement();
@@ -479,34 +485,43 @@ public class Tambah_Produk extends javax.swing.JDialog {
                     System.err.println("Ada Gagal Input Jasa : " + e.getMessage());
                 }
             } else {
-                try {
+                if (field_jumlah.equals("")) {
+                    label_warning_kp1.setVisible(true);
+                    label_warning_kp1.setText("Ketikkan Jumlah !");
+                    field_jumlah.requestFocus();
+                } else if (Integer.parseInt(field_jumlah.getText()) > Integer.parseInt(label_sisastok.getText())) {
+                    label_warning_kp1.setVisible(true);
+                    label_warning_kp1.setText("Stok Tidak Cukup !");
+                    field_jumlah.requestFocus();
+                } else {
+                    try {
 //                    String insertFirstBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 0, '" + field_hp.getText() + "');";
 //                    String insertSecondBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 0, '" + field_hp.getText() + "')"
 //                            + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText());
-                    String insertFirstBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', " + Integer.parseInt(field_jumlah.getText()) + ", " + field_hp.getText() + ")\n"
-                            + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText()) + ";";
-                    String insertSecondBarang = "UPDATE stok SET stok.jumlah_stok = stok.jumlah_stok - " + Integer.parseInt(field_jumlah.getText()) + " WHERE stok.kode_produk = '" + field_kp.getText() + "';";
-                    java.sql.Connection con = (Connection) configdb.GetConnection();
-                    java.sql.Statement stt = con.createStatement();
-                    java.sql.Statement stt1 = con.createStatement();
-                    stt.execute(insertFirstBarang);
-                    stt1.execute(insertSecondBarang);
-                    for (double i = 1.0; i >= 0.1; i = i - 0.25) {
-                        String val = i + "";
-                        float f = Float.valueOf(val);
-                        this.setOpacity(f);
-                        System.out.println(f);
-                        try {
-                            Thread.sleep(10);
-                            if (this.getOpacity() <= 0.25) {
-                                this.dispose();
-                            }
+                        String insertFirstBarang = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', " + Integer.parseInt(field_jumlah.getText()) + ", " + field_hp.getText() + ")\n"
+                                + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText()) + ";";
+                        String insertSecondBarang = "UPDATE stok SET stok.jumlah_stok = stok.jumlah_stok - " + Integer.parseInt(field_jumlah.getText()) + " WHERE stok.kode_produk = '" + field_kp.getText() + "';";
+                        java.sql.Connection con = (Connection) configdb.GetConnection();
+                        java.sql.Statement stt = con.createStatement();
+                        java.sql.Statement stt1 = con.createStatement();
+                        stt.execute(insertFirstBarang);
+                        stt1.execute(insertSecondBarang);
+                        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+                            String val = i + "";
+                            float f = Float.valueOf(val);
+                            this.setOpacity(f);
+                            System.out.println(f);
+                            try {
+                                Thread.sleep(10);
+                                if (this.getOpacity() <= 0.25) {
+                                    this.dispose();
+                                }
 
-                        } catch (Exception e) {
+                            } catch (Exception e) {
+                            }
                         }
-                    }
-                } catch (SQLException e) {
-                    System.err.println("Ada Gagal Input Barang : " + e.getMessage());
+                    } catch (SQLException e) {
+                        System.err.println("Ada Gagal Input Barang : " + e.getMessage());
 //                    try {
 //                        String insertSecondBarangg = "INSERT INTO temp_jual VALUES('" + field_kp.getText() + "', '" + field_np.getText() + "', 0, '" + field_hp.getText() + "')"
 //                                + "ON DUPLICATE KEY UPDATE temp_jual.qty = temp_jual.qty + " + Integer.parseInt(field_jumlah.getText());
@@ -531,6 +546,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
 //                    } catch (Exception ex) {
 //                        System.err.println("Ada Gagal Input Stok Barang : " + ex.getMessage());
 //                    }
+                    }
                 }
             }
         }
@@ -577,6 +593,12 @@ public class Tambah_Produk extends javax.swing.JDialog {
             label_sisastok.setText("-");
         }
     }//GEN-LAST:event_field_kpKeyReleased
+
+    private void button11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button11ActionPerformed
+        new com.fathan.form.transaksijual.Cari_Produk(new com.fathan.form.transaksijual.transaksi_jual(), true).setVisible(true);
+        field_kp.setText(new com.fathan.form.transaksijual.getKode_Produk().getKode_produk());
+        cari(new com.fathan.form.transaksijual.getKode_Produk().getKode_produk());
+    }//GEN-LAST:event_button11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -627,7 +649,7 @@ public class Tambah_Produk extends javax.swing.JDialog {
     private com.fathan.form.produk.Button button2;
     private javax.swing.JTextField field_hp;
     private javax.swing.JTextField field_jumlah;
-    private javax.swing.JTextField field_kp;
+    public javax.swing.JTextField field_kp;
     private javax.swing.JTextField field_np;
     private javax.swing.JTextField field_s;
     private javax.swing.JLabel jLabel1;
