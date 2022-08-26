@@ -187,7 +187,7 @@ public class Cari_Produk extends javax.swing.JDialog {
                     + "FROM produk\n"
                     + "JOIN kategori\n"
                     + "ON produk.id_kategori = kategori.id_kategori\n"
-                    + "WHERE produk.nama_produk LIKE '%" + key + "%' AND NOT produk.satuan = 'Jasa'\n"
+                    + "WHERE produk.nama_produk LIKE '%" + key + "%' AND NOT produk.id_kategori = 2\n"
                     + "ORDER BY produk.nama_produk ASC");
             while (rs.next()) {
                 Object[] data = {
@@ -224,7 +224,7 @@ public class Cari_Produk extends javax.swing.JDialog {
                     + "produk.harga_beli, produk.harga_jual\n"
                     + "FROM produk\n"
                     + "JOIN kategori\n"
-                    + "ON produk.id_kategori = kategori.id_kategori WHERE NOT produk.satuan = 'Jasa'\n"
+                    + "ON produk.id_kategori = kategori.id_kategori WHERE NOT produk.id_kategori = 2\n"
                     + "ORDER BY produk.nama_produk ASC";
             java.sql.Connection conn = (Connection) configdb.GetConnection();
             java.sql.Statement st = conn.createStatement();
