@@ -38,7 +38,6 @@ public class beranda extends javax.swing.JFrame {
             label_nama.setText(usr.getNama_lengkap());
             label_nama1.setText(usr.getRole().toUpperCase());
         }
-        
 
     }
 
@@ -149,6 +148,11 @@ public class beranda extends javax.swing.JFrame {
         button4.setForeground(new java.awt.Color(19, 179, 200));
         button4.setText("Pengguna");
         button4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button4ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 270, 50));
 
         button5.setForeground(new java.awt.Color(19, 179, 200));
@@ -289,46 +293,46 @@ public class beranda extends javax.swing.JFrame {
                 if (this.getOpacity() <= 0.25) {
                     this.dispose();
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         }
         new com.fathan.form.produk.produk().setVisible(true);
     }//GEN-LAST:event_button3ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        
+
         new com.fathan.form.about.lainnya(this, true).setVisible(true);
-        if (new com.fathan.form.about.logout().yn==true) {
+        if (new com.fathan.form.about.logout().yn == true) {
 //            new com.fathan.form.about.lainnya(this, true).stampLog_out();
             new com.fathan.form.about.logout().setLog_out(false);
             for (double i = 1.0; i >= 0.1; i = i - 0.25) {
-            String val = i + "";
-            float f = Float.valueOf(val);
-            this.setOpacity(f);
-            System.out.println(f);
-            try {
-                Thread.sleep(1);
-                if (this.getOpacity() <= 0.25) {
-                    this.dispose();
+                String val = i + "";
+                float f = Float.valueOf(val);
+                this.setOpacity(f);
+                System.out.println(f);
+                try {
+                    Thread.sleep(1);
+                    if (this.getOpacity() <= 0.25) {
+                        this.dispose();
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
 
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
+        }
 
-        }
-        }
-        
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void panel_topMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_topMouseClicked
-        
+
     }//GEN-LAST:event_panel_topMouseClicked
 
     private void panel_top1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panel_top1MouseClicked
-        
+
     }//GEN-LAST:event_panel_top1MouseClicked
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
@@ -342,10 +346,10 @@ public class beranda extends javax.swing.JFrame {
                 if (this.getOpacity() <= 0.25) {
                     this.dispose();
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         }
         new com.fathan.form.supplier.supplier().setVisible(true);
     }//GEN-LAST:event_button7ActionPerformed
@@ -361,10 +365,10 @@ public class beranda extends javax.swing.JFrame {
                 if (this.getOpacity() <= 0.25) {
                     this.dispose();
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         }
         new com.fathan.form.transaksijual.transaksi_jual().setVisible(true);
     }//GEN-LAST:event_button1ActionPerformed
@@ -380,13 +384,32 @@ public class beranda extends javax.swing.JFrame {
                 if (this.getOpacity() <= 0.25) {
                     this.dispose();
                 }
-                
+
             } catch (Exception e) {
             }
-            
+
         }
         new com.fathan.form.transaksibeli.transaksi_beli().setVisible(true);
     }//GEN-LAST:event_button8ActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        new com.fathan.form.pengguna.pengguna().setVisible(true);
+    }//GEN-LAST:event_button4ActionPerformed
 
     /**
      * @param args the command line arguments
