@@ -5,14 +5,7 @@
  */
 package com.fathan.form.beranda;
 
-import com.fathan.main.*;
-import com.fathan.db.configdb;
 import java.awt.Color;
-import java.awt.Frame;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -158,6 +151,11 @@ public class beranda extends javax.swing.JFrame {
         button5.setForeground(new java.awt.Color(19, 179, 200));
         button5.setText("Laporan");
         button5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
         panel_top1.add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 270, 50));
 
         button6.setForeground(new java.awt.Color(19, 179, 200));
@@ -397,7 +395,6 @@ public class beranda extends javax.swing.JFrame {
             String val = i + "";
             float f = Float.valueOf(val);
             this.setOpacity(f);
-            System.out.println(f);
             try {
                 Thread.sleep(1);
                 if (this.getOpacity() <= 0.25) {
@@ -410,6 +407,24 @@ public class beranda extends javax.swing.JFrame {
         }
         new com.fathan.form.pengguna.pengguna().setVisible(true);
     }//GEN-LAST:event_button4ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        new com.fathan.form.laporan.laporan().setVisible(true);
+    }//GEN-LAST:event_button5ActionPerformed
 
     /**
      * @param args the command line arguments

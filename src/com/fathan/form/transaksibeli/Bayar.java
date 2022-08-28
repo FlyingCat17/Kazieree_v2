@@ -255,7 +255,7 @@ public class Bayar extends javax.swing.JDialog {
 //                            + "VALUES ('" + field_kodeTransaksi.getText() + "','" + kode_produk + "','" + nama_produk + "','" + harga_jual + "','" + qty + "','" + hargaKaliQty + "')";
                     String sql2 = "INSERT INTO `detail_beli`(`kode_transaksi`, `kode_produk`, `nama_produk`, `harga_beli`, `qty`, `total_harga`) "
                             + "VALUES ('" + field_kodeTransaksi.getText() + "','" + kode_produk + "','"
-                            + nama_produk + "','" + qty + "','" + harga_beli + "','" + hargaKaliQty + "')";
+                            + nama_produk + "','" + harga_beli + "','" + qty + "','" + hargaKaliQty + "')";
                     java.sql.Statement st1 = con.createStatement();
                     st1.execute(sql2);
 //                    st1.execute(sql);

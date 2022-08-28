@@ -37,6 +37,7 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
         radioButtonCustom2.setActionCommand("L");
         field_ip.setText(new com.fathan.form.pengguna.getPengguna().getId_pengguna());
         loadDataPenggunaa();
+        label_jk.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -62,6 +63,7 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
         label_warning_nl = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         label_warning_us1 = new javax.swing.JLabel();
+        label_jk = new javax.swing.JLabel();
         label_warning_us = new javax.swing.JLabel();
         label_success1 = new javax.swing.JLabel();
         label_success = new javax.swing.JLabel();
@@ -243,6 +245,11 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
         label_warning_us1.setText("Username Telah Terpakai !");
         panelBordeer1.add(label_warning_us1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 200, 20));
 
+        label_jk.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        label_jk.setForeground(new java.awt.Color(255, 51, 51));
+        label_jk.setText("Jenis Kelamin Kosong!");
+        panelBordeer1.add(label_jk, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 220, 20));
+
         label_warning_us.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         label_warning_us.setForeground(new java.awt.Color(255, 51, 51));
         label_warning_us.setText("Username Kosong!");
@@ -306,11 +313,21 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
         buttonGroup1.add(radioButtonCustom1);
         radioButtonCustom1.setText("Perempuan");
         radioButtonCustom1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        radioButtonCustom1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonCustom1ActionPerformed(evt);
+            }
+        });
         panelBordeer1.add(radioButtonCustom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 370, -1, 30));
 
         buttonGroup1.add(radioButtonCustom2);
         radioButtonCustom2.setText("Laki-Laki");
         radioButtonCustom2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        radioButtonCustom2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioButtonCustom2ActionPerformed(evt);
+            }
+        });
         panelBordeer1.add(radioButtonCustom2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 25)); // NOI18N
@@ -462,7 +479,7 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        System.out.println(buttonGroup1.getSelection().getActionCommand());
+
         if (username_similar = false) {
             field_us.requestFocus();
         } else if (field_us.getText().equals("")) {
@@ -472,6 +489,8 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
         } else if (field_nl.getText().equals("")) {
             label_warning_nl.setVisible(true);
             field_nl.requestFocus();
+        } else if (buttonGroup1.isSelected(null)) {
+            label_jk.setVisible(true);
         } else {
             try {
                 String update_pengguna = "UPDATE `pengguna` SET `nama_pengguna`='" + field_us.getText() + "'\n"
@@ -482,7 +501,7 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
                         + "`no_telepon`='" + field_nt.getText() + "',"
                         + "`alamat`='" + field_a.getText() + "' \n"
                         + "WHERE detail_pengguna.id_pengguna = '" + new com.fathan.form.pengguna.getPengguna().getId_pengguna() + "';";
-                java.sql.Connection con = (Connection)configdb.GetConnection();
+                java.sql.Connection con = (Connection) configdb.GetConnection();
                 java.sql.Statement st = con.createStatement();
                 java.sql.Statement st1 = con.createStatement();
                 st.execute(update_pengguna);
@@ -542,8 +561,16 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
         new com.fathan.form.pengguna.getPengguna().setNama_pengguna(field_us.getText());
         new com.fathan.form.pengguna.option_reset(new com.fathan.form.pengguna.pengguna(), true).setVisible(true);
-        
+
     }//GEN-LAST:event_button3ActionPerformed
+
+    private void radioButtonCustom2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCustom2ActionPerformed
+        label_jk.setVisible(false);
+    }//GEN-LAST:event_radioButtonCustom2ActionPerformed
+
+    private void radioButtonCustom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonCustom1ActionPerformed
+        label_jk.setVisible(false);
+    }//GEN-LAST:event_radioButtonCustom1ActionPerformed
     public void autoKode() {
         try {
             String sql = "SELECT MAX(RIGHT(produk.kode_produk,3)) AS nomor FROM produk WHERE produk.satuan = 'Jasa'";
@@ -634,6 +661,7 @@ public class Ubah_Pengguna extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_jk;
     private javax.swing.JLabel label_success;
     private javax.swing.JLabel label_success1;
     private javax.swing.JLabel label_warning_ip;
