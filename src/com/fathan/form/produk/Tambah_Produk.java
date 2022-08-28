@@ -361,6 +361,9 @@ public class Tambah_Produk extends javax.swing.JDialog {
 
     private void field_kpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_kpKeyTyped
         char k = evt.getKeyChar();
+        if (Character.isLowerCase(k)) {
+            evt.setKeyChar(Character.toUpperCase(k));
+        }
         if (field_kp.isEditable()) {
             label_warning_kp.setVisible(false);
             if (field_kp.getText().length() >= 45) {

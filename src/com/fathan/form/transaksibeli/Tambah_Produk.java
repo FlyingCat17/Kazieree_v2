@@ -554,9 +554,9 @@ public class Tambah_Produk extends javax.swing.JDialog {
     }//GEN-LAST:event_field_kpKeyReleased
 
     private void button11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button11ActionPerformed
-        new com.fathan.form.transaksijual.Cari_Produk(new com.fathan.form.transaksijual.transaksi_jual(), true).setVisible(true);
-        field_kp.setText(new com.fathan.form.transaksijual.getKode_Produk().getKode_produk());
-        cari(new com.fathan.form.transaksijual.getKode_Produk().getKode_produk());
+        new com.fathan.form.transaksibeli.Cari_Produk(new com.fathan.form.transaksibeli.transaksi_beli(), true).setVisible(true);
+        field_kp.setText(new com.fathan.form.transaksibeli.getKode_Produk().getKode_produk());
+        cari(new com.fathan.form.transaksibeli.getKode_Produk().getKode_produk());
     }//GEN-LAST:event_button11ActionPerformed
 
     /**
