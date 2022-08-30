@@ -68,6 +68,7 @@ public class Bayar extends javax.swing.JDialog {
                 } else {
                     label_totalHarga.setText("Rp" + rs1.getString("Totall"));
                     total_harga = Integer.parseInt(rs1.getString("Totall"));
+                    setTotal_hargaa(Integer.parseInt(rs1.getString("Totall")));
                     System.out.println("Total Harga Saat ini = " + total_harga);
                 }
             }
@@ -76,6 +77,15 @@ public class Bayar extends javax.swing.JDialog {
         }
 
     }
+
+    public void setTotal_hargaa(int total_hargaa) {
+        this.total_hargaa = total_hargaa;
+    }
+
+    public int getTotal_hargaa() {
+        return total_hargaa;
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,6 +107,7 @@ public class Bayar extends javax.swing.JDialog {
         label_totalHarga = new javax.swing.JLabel();
         field_kodeTransaksi = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -192,6 +203,14 @@ public class Bayar extends javax.swing.JDialog {
         jLabel5.setText("Detail Pembayaran");
         panelBordeer1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 260, 50));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panelBordeer1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, -1, -1));
+
         getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 510));
 
         pack();
@@ -238,9 +257,10 @@ public class Bayar extends javax.swing.JDialog {
         try {
             String sql = "INSERT INTO `jual`(`kode_transaksi`, `tgl_transaksi`, `id_pengguna`, `id_cashbox`, `total_harga`, `nominal_bayar`) "
                     + "VALUES ('" + field_kodeTransaksi.getText() + "','" + sdf.format(todayNow).toString() + "','" + new com.fathan.user.user().getId_pengguna() + "','1','" + total_hargaa + "','')";
-            String sqll = "INSERT INTO `beli`(`kode_transaksi`, `tgl_transaksi`, `id_pengguna`, `id_pemasok`, `total_harga`) "
+            String sqll = "INSERT INTO `beli`(`kode_transaksi`, `tgl_transaksi`, `id_pengguna`, `id_pemasok`, `total_harga`, `id_cashbox`) "
                     + "VALUES ('" + field_kodeTransaksi.getText() + "','" + sdf.format(todayNow).toString() + "','" + new com.fathan.user.user().getId_pengguna()
-                    + "','" + new com.fathan.form.transaksibeli.getKode_Produk().getKode_supplier() + "','" + total_hargaa + "')";
+                    + "','" + new com.fathan.form.transaksibeli.getKode_Produk().getKode_supplier() + "','" + getTotal_hargaa() + "', 1)";
+            System.out.println(sqll);
             java.sql.Connection con = (Connection) configdb.GetConnection();
             java.sql.Statement st = con.createStatement();
             st.execute(sqll);
@@ -297,6 +317,10 @@ public class Bayar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tableDark2MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(total_hargaa);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,6 +374,7 @@ public class Bayar extends javax.swing.JDialog {
     private com.fathan.form.produk.Button button1;
     private com.fathan.form.produk.Button button2;
     private javax.swing.JLabel field_kodeTransaksi;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

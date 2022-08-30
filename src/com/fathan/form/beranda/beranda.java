@@ -22,7 +22,6 @@ public class beranda extends javax.swing.JFrame {
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
         panel_top.setBackground(new Color(255, 255, 255, 240));
-        panel_top1.setBackground(new Color(255, 255, 255, 100));
         if (usr.getNama() == null) {
             label_ucapan.setText("Selamat Datang, fulan");
             label_nama.setText("nothing else");
@@ -45,18 +44,24 @@ public class beranda extends javax.swing.JFrame {
 
         panelBordeer1 = new com.fathan.swing.PanelBordeer();
         panel_top1 = new com.fathan.swing.PanelRound();
-        panelBorderGradient1 = new com.fathan.swing.PanelBorderGradient();
         jLabel2 = new javax.swing.JLabel();
-        button8 = new com.fathan.form.beranda.Button();
-        button1 = new com.fathan.form.beranda.Button();
-        button3 = new com.fathan.form.beranda.Button();
-        button4 = new com.fathan.form.beranda.Button();
-        button5 = new com.fathan.form.beranda.Button();
+        panelShadow10 = new main.PanelShadow();
         button6 = new com.fathan.form.beranda.Button();
+        panelShadow4 = new main.PanelShadow();
+        button1 = new com.fathan.form.beranda.Button();
+        panelShadow7 = new main.PanelShadow();
+        button4 = new com.fathan.form.beranda.Button();
+        panelShadow6 = new main.PanelShadow();
         button7 = new com.fathan.form.beranda.Button();
-        panelBorderGradient11 = new com.fathan.swing.PanelBorderGradient1();
-        panelBorderGradient21 = new com.fathan.swing.PanelBorderGradient2();
-        panelBorderGradient2 = new com.fathan.form.beranda.PanelBorderGradient();
+        panelShadow3 = new main.PanelShadow();
+        button8 = new com.fathan.form.beranda.Button();
+        panelShadow2 = new main.PanelShadow();
+        button5 = new com.fathan.form.beranda.Button();
+        panelShadow1 = new main.PanelShadow();
+        button3 = new com.fathan.form.beranda.Button();
+        panelShadow5 = new main.PanelShadow();
+        panelShadow8 = new main.PanelShadow();
+        panelShadow9 = new main.PanelShadow();
         jLabel1 = new javax.swing.JLabel();
         panel_top = new com.fathan.swing.PanelRound();
         label_nama1 = new javax.swing.JLabel();
@@ -65,7 +70,8 @@ public class beranda extends javax.swing.JFrame {
         label_ucapan = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1294, 679));
+        setMaximumSize(new java.awt.Dimension(1140, 680));
+        setMinimumSize(new java.awt.Dimension(1140, 680));
         setUndecorated(true);
         setOpacity(0.0F);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -76,6 +82,7 @@ public class beranda extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelBordeer1.setForeground(new java.awt.Color(247, 247, 247));
+        panelBordeer1.setPreferredSize(new java.awt.Dimension(1140, 680));
         panelBordeer1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panel_top1.setBackground(new java.awt.Color(255, 255, 255));
@@ -90,134 +97,180 @@ public class beranda extends javax.swing.JFrame {
         });
         panel_top1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panelBorderGradient1Layout = new javax.swing.GroupLayout(panelBorderGradient1);
-        panelBorderGradient1.setLayout(panelBorderGradient1Layout);
-        panelBorderGradient1Layout.setHorizontalGroup(
-            panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelBorderGradient1Layout.setVerticalGroup(
-            panelBorderGradient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        panel_top1.add(panelBorderGradient1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 270, 150));
-
         jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Daftar Menu");
         panel_top1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 475, 60));
 
-        button8.setForeground(new java.awt.Color(19, 179, 200));
-        button8.setText("Transaksi Beli");
-        button8.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        button8.addActionListener(new java.awt.event.ActionListener() {
+        panelShadow10.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button6.setForeground(new java.awt.Color(19, 179, 200));
+        button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_pengeluaran.png"))); // NOI18N
+        button6.setText("Pengeluaran");
+        button6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button6.setIconTextGap(10);
+        button6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button8ActionPerformed(evt);
+                button6ActionPerformed(evt);
             }
         });
-        panel_top1.add(button8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 270, 50));
+        panelShadow10.add(button6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
+
+        panel_top1.add(panelShadow10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 230, 50));
+
+        panelShadow4.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         button1.setForeground(new java.awt.Color(19, 179, 200));
+        button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_kurangJual.png"))); // NOI18N
         button1.setText("Transaksi Jual");
         button1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button1.setIconTextGap(7);
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button1ActionPerformed(evt);
             }
         });
-        panel_top1.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 250, 280, 50));
+        panelShadow4.add(button1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
 
-        button3.setForeground(new java.awt.Color(19, 179, 200));
-        button3.setText("Produk");
-        button3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        button3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
-            }
-        });
-        panel_top1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 270, 50));
+        panel_top1.add(panelShadow4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 230, 50));
+
+        panelShadow7.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         button4.setForeground(new java.awt.Color(19, 179, 200));
+        button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_people.png"))); // NOI18N
         button4.setText("Pengguna");
         button4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button4.setIconTextGap(10);
         button4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button4ActionPerformed(evt);
             }
         });
-        panel_top1.add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, 270, 50));
+        panelShadow7.add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
 
-        button5.setForeground(new java.awt.Color(19, 179, 200));
-        button5.setText("Laporan");
-        button5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        button5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button5ActionPerformed(evt);
-            }
-        });
-        panel_top1.add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 270, 50));
+        panel_top1.add(panelShadow7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 230, 50));
 
-        button6.setForeground(new java.awt.Color(19, 179, 200));
-        button6.setText("Riwayat Transaksi");
-        button6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        panel_top1.add(button6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 270, 50));
+        panelShadow6.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         button7.setForeground(new java.awt.Color(19, 179, 200));
+        button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_supplier.png"))); // NOI18N
         button7.setText("Supplier");
         button7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button7.setIconTextGap(8);
         button7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button7ActionPerformed(evt);
             }
         });
-        panel_top1.add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 270, 50));
+        panelShadow6.add(button7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
 
-        panelBorderGradient11.setPreferredSize(new java.awt.Dimension(370, 150));
+        panel_top1.add(panelShadow6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 250, 230, 50));
 
-        javax.swing.GroupLayout panelBorderGradient11Layout = new javax.swing.GroupLayout(panelBorderGradient11);
-        panelBorderGradient11.setLayout(panelBorderGradient11Layout);
-        panelBorderGradient11Layout.setHorizontalGroup(
-            panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button8.setForeground(new java.awt.Color(19, 179, 200));
+        button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_tambahBeli.png"))); // NOI18N
+        button8.setText("Transaksi Beli");
+        button8.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button8.setIconTextGap(7);
+        button8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button8ActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(button8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
+
+        panel_top1.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, 230, 50));
+
+        panelShadow2.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button5.setForeground(new java.awt.Color(19, 179, 200));
+        button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_report.png"))); // NOI18N
+        button5.setText("Laporan");
+        button5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button5.setIconTextGap(10);
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
+        panelShadow2.add(button5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
+
+        panel_top1.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 230, 50));
+
+        panelShadow1.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button3.setForeground(new java.awt.Color(19, 179, 200));
+        button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_produk.png"))); // NOI18N
+        button3.setText("Produk");
+        button3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        button3.setIconTextGap(12);
+        button3.setOpaque(true);
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+        panelShadow1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 30));
+
+        panel_top1.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 230, 50));
+
+        panelShadow5.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelShadow5Layout = new javax.swing.GroupLayout(panelShadow5);
+        panelShadow5.setLayout(panelShadow5Layout);
+        panelShadow5Layout.setHorizontalGroup(
+            panelShadow5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
         );
-        panelBorderGradient11Layout.setVerticalGroup(
-            panelBorderGradient11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panelShadow5Layout.setVerticalGroup(
+            panelShadow5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelBorderGradient11, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 280, 150));
+        panel_top1.add(panelShadow5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 320, 140));
 
-        javax.swing.GroupLayout panelBorderGradient21Layout = new javax.swing.GroupLayout(panelBorderGradient21);
-        panelBorderGradient21.setLayout(panelBorderGradient21Layout);
-        panelBorderGradient21Layout.setHorizontalGroup(
-            panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelBorderGradient21Layout.setVerticalGroup(
-            panelBorderGradient21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        panelShadow8.setBackground(new java.awt.Color(255, 255, 255));
 
-        panel_top1.add(panelBorderGradient21, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 30, 280, 150));
-
-        javax.swing.GroupLayout panelBorderGradient2Layout = new javax.swing.GroupLayout(panelBorderGradient2);
-        panelBorderGradient2.setLayout(panelBorderGradient2Layout);
-        panelBorderGradient2Layout.setHorizontalGroup(
-            panelBorderGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelShadow8Layout = new javax.swing.GroupLayout(panelShadow8);
+        panelShadow8.setLayout(panelShadow8Layout);
+        panelShadow8Layout.setHorizontalGroup(
+            panelShadow8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
         );
-        panelBorderGradient2Layout.setVerticalGroup(
-            panelBorderGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panelShadow8Layout.setVerticalGroup(
+            panelShadow8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
         );
 
-        panel_top1.add(panelBorderGradient2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 30, 280, 150));
+        panel_top1.add(panelShadow8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
-        panelBordeer1.add(panel_top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 1220, 490));
+        panelShadow9.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelShadow9Layout = new javax.swing.GroupLayout(panelShadow9);
+        panelShadow9.setLayout(panelShadow9Layout);
+        panelShadow9Layout.setHorizontalGroup(
+            panelShadow9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+        panelShadow9Layout.setVerticalGroup(
+            panelShadow9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+        );
+
+        panel_top1.add(panelShadow9, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
+
+        panelBordeer1.add(panel_top1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 1060, 490));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/bg_beranda.png"))); // NOI18N
-        panelBordeer1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, 440));
+        panelBordeer1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 1140, 440));
 
         panel_top.setBackground(new java.awt.Color(255, 255, 255));
         panel_top.setRoundBottomLeft(15);
@@ -235,14 +288,14 @@ public class beranda extends javax.swing.JFrame {
         label_nama1.setForeground(new java.awt.Color(51, 51, 51));
         label_nama1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_nama1.setText("label_role");
-        panel_top.add(label_nama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 250, 40));
+        panel_top.add(label_nama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 30, 250, 40));
 
         label_nama.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
         label_nama.setForeground(new java.awt.Color(51, 51, 51));
         label_nama.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_nama.setText("label_nama");
         label_nama.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        panel_top.add(label_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 0, 250, 40));
+        panel_top.add(label_nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 0, 250, 40));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/beranda/icon_person.png"))); // NOI18N
@@ -251,16 +304,16 @@ public class beranda extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        panel_top.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 0, 70, 70));
+        panel_top.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, 70, 70));
 
         label_ucapan.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 22)); // NOI18N
         label_ucapan.setForeground(new java.awt.Color(51, 51, 51));
         label_ucapan.setText("Selamat Datang, fulan!");
         panel_top.add(label_ucapan, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 0, 475, 70));
 
-        panelBordeer1.add(panel_top, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1220, 70));
+        panelBordeer1.add(panel_top, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 1060, 70));
 
-        getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 680));
+        getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1140, 680));
 
         pack();
         setLocationRelativeTo(null);
@@ -271,7 +324,6 @@ public class beranda extends javax.swing.JFrame {
             String val = i + "";
             float f = Float.valueOf(val);
             this.setOpacity(f);
-            System.out.println(f);
             try {
                 Thread.sleep(1);
             } catch (Exception e) {
@@ -426,6 +478,11 @@ public class beranda extends javax.swing.JFrame {
         new com.fathan.form.laporan.laporan().setVisible(true);
     }//GEN-LAST:event_button5ActionPerformed
 
+    private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
+        
+        new com.fathan.form.pengeluaran.TambahPengeluaran(this, true).setVisible(true);
+    }//GEN-LAST:event_button6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -477,10 +534,16 @@ public class beranda extends javax.swing.JFrame {
     public javax.swing.JLabel label_nama1;
     public javax.swing.JLabel label_ucapan;
     private com.fathan.swing.PanelBordeer panelBordeer1;
-    private com.fathan.swing.PanelBorderGradient panelBorderGradient1;
-    private com.fathan.swing.PanelBorderGradient1 panelBorderGradient11;
-    private com.fathan.form.beranda.PanelBorderGradient panelBorderGradient2;
-    private com.fathan.swing.PanelBorderGradient2 panelBorderGradient21;
+    private main.PanelShadow panelShadow1;
+    private main.PanelShadow panelShadow10;
+    private main.PanelShadow panelShadow2;
+    private main.PanelShadow panelShadow3;
+    private main.PanelShadow panelShadow4;
+    private main.PanelShadow panelShadow5;
+    private main.PanelShadow panelShadow6;
+    private main.PanelShadow panelShadow7;
+    private main.PanelShadow panelShadow8;
+    private main.PanelShadow panelShadow9;
     private com.fathan.swing.PanelRound panel_top;
     private com.fathan.swing.PanelRound panel_top1;
     // End of variables declaration//GEN-END:variables
