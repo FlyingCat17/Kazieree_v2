@@ -355,7 +355,6 @@ public class beranda extends javax.swing.JFrame {
 
         new com.fathan.form.about.lainnya(this, true).setVisible(true);
         if (new com.fathan.form.about.logout().yn == true) {
-//            new com.fathan.form.about.lainnya(this, true).stampLog_out();
             new com.fathan.form.about.logout().setLog_out(false);
             for (double i = 1.0; i >= 0.1; i = i - 0.25) {
                 String val = i + "";
