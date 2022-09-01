@@ -34,18 +34,18 @@ public class login extends javax.swing.JFrame {
         System.out.println(new com.fathan.form.about.logout().getStatusLog_Out());
     }
 
-    public void clear_log(){
+    public void clear_log() {
         try {
             String sql = "DELETE FROM log_pengguna WHERE DATEDIFF(CURTIME(), log_pengguna.stamp) > 30";
-            java.sql.Connection con = (Connection)configdb.GetConnection();
+            java.sql.Connection con = (Connection) configdb.GetConnection();
             java.sql.Statement st = con.createStatement();
             st.execute(sql);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -246,7 +246,7 @@ public class login extends javax.swing.JFrame {
     com.fathan.user.user usr = new com.fathan.user.user();
 
     public void login() {
-        
+
         try {
             String sql = "SELECT * FROM `pengguna` WHERE nama_pengguna = '" + field_username.getText() + "' && kata_sandi = '" + field_password.getText() + "';";
             Connection con = (Connection) configdb.GetConnection();
@@ -267,15 +267,15 @@ public class login extends javax.swing.JFrame {
                     label_salah.setText("Berhasil Masuk!");
                     if (rss.next()) {
                         System.out.println("Nama Lengkap : " + rss.getString("nama_lengkap"));
-                        new com.fathan.form.beranda.beranda().label_ucapan.setText("Selamat Datang, "+rs.getString("nama_pengguna"));
+                        new com.fathan.form.beranda.beranda().label_ucapan.setText("Selamat Datang, " + rs.getString("nama_pengguna"));
                         new com.fathan.form.beranda.beranda().label_nama.setText(rss.getString("nama_lengkap"));
                         usr.setNama_Lengkap(rss.getString("nama_lengkap"));
                         try {
                             Date today = new Date();
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                             String stampLoginAdmin = "INSERT INTO `log_pengguna`(`no_log`, `id_pengguna`, `nama_pengguna`, `role`, `stamp`, `tipe`) "
-                                + "VALUES (NULL, '"+usr.getId_pengguna()+"','"+usr.getNama()+"','"+usr.getRole()+"','"+sdf.format(today)+"','Masuk')";
-                            Connection con1 = (Connection)configdb.GetConnection();
+                                    + "VALUES (NULL, '" + usr.getId_pengguna() + "','" + usr.getNama() + "','" + usr.getRole() + "','" + sdf.format(today) + "','Masuk')";
+                            Connection con1 = (Connection) configdb.GetConnection();
                             Statement st1 = con1.createStatement();
                             st1.execute(stampLoginAdmin);
                             new com.fathan.form.beranda.beranda().setVisible(true);
@@ -298,10 +298,44 @@ public class login extends javax.swing.JFrame {
                         }
 
                     }
-                } else if (rs.getString("hak_akses").equals("karyawan")) {
+                } else if (rs.getString("role").equals("karyawan")) {
                     label_salah.setVisible(true);
                     label_salah.setForeground(new Color(80, 235, 77));
                     label_salah.setText("Berhasil Masuk!");
+                    if (rss.next()) {
+                        System.out.println("Nama Lengkap : " + rss.getString("nama_lengkap"));
+                        new com.fathan.form.beranda.beranda().label_ucapan.setText("Selamat Datang, " + rs.getString("nama_pengguna"));
+                        new com.fathan.form.beranda.beranda().label_nama.setText(rss.getString("nama_lengkap"));
+                        usr.setNama_Lengkap(rss.getString("nama_lengkap"));
+                        try {
+                            Date today = new Date();
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                            String stampLoginKaryawan = "INSERT INTO `log_pengguna`(`no_log`, `id_pengguna`, `nama_pengguna`, `role`, `stamp`, `tipe`) "
+                                    + "VALUES (NULL, '" + usr.getId_pengguna() + "','" + usr.getNama() + "','" + usr.getRole() + "','" + sdf.format(today) + "','Masuk')";
+                            Connection con1 = (Connection) configdb.GetConnection();
+                            Statement st1 = con1.createStatement();
+                            st1.execute(stampLoginKaryawan);
+                            new com.fathan.form.beranda.beranda().setVisible(true);
+                        } catch (Exception e) {
+                            label_salah1.setVisible(true);
+                            System.err.println(e.getMessage());
+                        }
+                    }
+                    for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+                        String val = i + "";
+                        float f = Float.valueOf(val);
+                        this.setOpacity(f);
+                        System.out.println(f);
+                        try {
+                            Thread.sleep(1);
+                            if (this.getOpacity() <= 0.25) {
+                                this.dispose();
+                                System.out.println("Role : "+usr.getRole());
+                            }
+                        } catch (Exception e) {
+                        }
+
+                    }
                 }
             } else {
                 label_salah.setVisible(true);
@@ -309,12 +343,12 @@ public class login extends javax.swing.JFrame {
                 label_salah.setText("Nama Pengguna / Kata Sandi salah!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Username Atau Katasandi Salah!!");
+            JOptionPane.showMessageDialog(this, "Any Problem");
             System.err.println(e.getMessage());
 
         }
     }
-    
+
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         login();
     }//GEN-LAST:event_button2ActionPerformed

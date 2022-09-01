@@ -26,6 +26,9 @@ public class lainnya extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setBackground(new Color(0, 0, 0, 0));
+        jLabel1.setText(new com.fathan.user.user().getId_pengguna());
+        jLabel2.setText(new com.fathan.user.user().getNama());
+        jLabel3.setText(new com.fathan.user.user().getNama_lengkap());
     }
 
     /**
@@ -37,8 +40,17 @@ public class lainnya extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBordeer1 = new com.fathan.swing.PanelBordeer();
-        button1 = new com.fathan.form.about.Button();
+        panelShadow1 = new main.PanelShadow();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        panelShadow4 = new main.PanelShadow();
+        button4 = new com.fathan.form.about.Button();
+        panelShadow3 = new main.PanelShadow();
+        button3 = new com.fathan.form.about.Button();
+        panelShadow2 = new main.PanelShadow();
+        button2 = new com.fathan.form.about.Button();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -48,47 +60,80 @@ public class lainnya extends javax.swing.JDialog {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelBordeer1.setBackground(new java.awt.Color(255, 255, 255));
-        panelBordeer1.setForeground(new java.awt.Color(255, 255, 255));
+        panelShadow1.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        button1.setBackground(new java.awt.Color(255, 51, 51));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("KELUAR");
-        button1.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 13)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Fathan Maulana");
+        panelShadow1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 510, 30));
+
+        jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("fthnmrh");
+        panelShadow1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 510, 20));
+
+        jLabel1.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("A00001");
+        panelShadow1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 90, 30));
+
+        panelShadow4.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button4.setForeground(new java.awt.Color(19, 179, 200));
+        button4.setText("UBAH AKUN");
+        button4.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 13)); // NOI18N
+        button4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                button4ActionPerformed(evt);
             }
         });
+        panelShadow4.add(button4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, 30));
 
-        javax.swing.GroupLayout panelBordeer1Layout = new javax.swing.GroupLayout(panelBordeer1);
-        panelBordeer1.setLayout(panelBordeer1Layout);
-        panelBordeer1Layout.setHorizontalGroup(
-            panelBordeer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBordeer1Layout.createSequentialGroup()
-                .addGap(186, 186, 186)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
-        );
-        panelBordeer1Layout.setVerticalGroup(
-            panelBordeer1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBordeer1Layout.createSequentialGroup()
-                .addContainerGap(345, Short.MAX_VALUE)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
-        );
+        panelShadow1.add(panelShadow4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 250, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBordeer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBordeer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button3.setForeground(new java.awt.Color(19, 179, 200));
+        button3.setText("BATAL");
+        button3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 13)); // NOI18N
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
+        panelShadow3.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 30));
+
+        panelShadow1.add(panelShadow3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 120, 50));
+
+        panelShadow2.setBackground(new java.awt.Color(255, 51, 51));
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        button2.setBackground(new java.awt.Color(255, 51, 51));
+        button2.setForeground(new java.awt.Color(255, 255, 255));
+        button2.setText("KELUAR");
+        button2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 13)); // NOI18N
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
+        panelShadow2.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 30));
+
+        panelShadow1.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 430, 120, 50));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/form/about/icon_user.png"))); // NOI18N
+        panelShadow1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 510, -1));
+
+        getContentPane().add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 520));
 
         pack();
         setLocationRelativeTo(null);
@@ -136,7 +181,7 @@ public class lainnya extends javax.swing.JDialog {
         }
 
     }
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         new com.fathan.form.about.logout().setLog_out(true);
         for (double i = 1.0; i >= 0.1; i = i - 0.25) {
             String val = i + "";
@@ -162,7 +207,46 @@ public class lainnya extends javax.swing.JDialog {
         }
         stampLog_out();
         new com.fathan.main.login().setVisible(true);
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            System.out.println(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        new com.fathan.form.about.ubahAkun.Ubah_Pengguna(new com.fathan.form.beranda.beranda(), true).setVisible(true);
+    }//GEN-LAST:event_button4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +291,16 @@ public class lainnya extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.fathan.form.about.Button button1;
-    private com.fathan.swing.PanelBordeer panelBordeer1;
+    private com.fathan.form.about.Button button2;
+    private com.fathan.form.about.Button button3;
+    private com.fathan.form.about.Button button4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private main.PanelShadow panelShadow1;
+    private main.PanelShadow panelShadow2;
+    private main.PanelShadow panelShadow3;
+    private main.PanelShadow panelShadow4;
     // End of variables declaration//GEN-END:variables
 }
