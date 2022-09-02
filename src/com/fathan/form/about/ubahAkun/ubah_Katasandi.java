@@ -381,7 +381,7 @@ public class ubah_Katasandi extends javax.swing.JDialog {
                 String sql = "UPDATE pengguna SET pengguna.kata_sandi = '" + field_konfirmasibaru.getText() + "' "
                         + "WHERE pengguna.id_pengguna = '" + usr.getId_pengguna() + "'";
                 System.out.println(sql);
-                java.sql.Connection con = (Connection)configdb.GetConnection();
+                java.sql.Connection con = (Connection) configdb.GetConnection();
                 java.sql.PreparedStatement pst = con.prepareStatement(sql);
                 pst.execute();
                 label_warning.setVisible(true);

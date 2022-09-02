@@ -87,7 +87,7 @@ public class option_reset extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Yakin Ingin Menghapus Produk Ini?");
+        jLabel3.setText("Yakin Ingin Mereset Kata Sandi Ini?");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 490, 40));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -140,8 +140,8 @@ public class option_reset extends javax.swing.JDialog {
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         try {
-            String sql = "UPDATE pengguna SET pengguna.kata_sandi = '" + new com.fathan.form.pengguna.getPengguna().getNama_pengguna() + "'"
-                    + " WHERE pengguna.nama_pengguna = '" + new com.fathan.form.pengguna.getPengguna().getNama_pengguna() + "'";
+            String sql = "UPDATE pengguna SET pengguna.kata_sandi = '" + new com.fathan.form.pengguna.getPengguna().getNama_pengguna() + "', pengguna.status = 'aktif'\n"
+                    + "WHERE pengguna.id_pengguna = '" + new com.fathan.form.pengguna.getPengguna().getNama_pengguna()+ "'";
             java.sql.Connection con = (Connection) configdb.GetConnection();
             java.sql.Statement st = con.createStatement();
             st.execute(sql);

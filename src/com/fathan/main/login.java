@@ -56,11 +56,13 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBordeer1 = new com.fathan.swing.PanelBordeer();
+        panelShadow2 = new main.PanelShadow();
+        jLabel7 = new javax.swing.JLabel();
+        panelShadow1 = new main.PanelShadow();
+        jLabel6 = new javax.swing.JLabel();
         label_salah1 = new javax.swing.JLabel();
         label_forgerpw = new javax.swing.JLabel();
         label_salah = new javax.swing.JLabel();
-        button3 = new com.fathan.swing.Button();
-        button2 = new com.fathan.swing.Button();
         jSeparator1 = new javax.swing.JSeparator();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
@@ -90,47 +92,63 @@ public class login extends javax.swing.JFrame {
         panelBordeer1.setForeground(new java.awt.Color(204, 204, 204));
         panelBordeer1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelShadow2.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(19, 179, 200));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("DAFTAR");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
+        panelShadow2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 30));
+
+        panelBordeer1.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 520, 380, 50));
+
+        panelShadow1.setBackground(new java.awt.Color(19, 179, 200));
+        panelShadow1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("MASUK");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        panelShadow1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 360, 30));
+
+        panelBordeer1.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 450, 380, 50));
+
         label_salah1.setFont(new java.awt.Font("Montserrat Medium", 0, 11)); // NOI18N
         label_salah1.setForeground(new java.awt.Color(255, 0, 0));
         label_salah1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_salah1.setText("Gagal Masuk!");
-        panelBordeer1.add(label_salah1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 430, 150, 20));
+        panelBordeer1.add(label_salah1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 420, 150, 20));
 
         label_forgerpw.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         label_forgerpw.setForeground(new java.awt.Color(68, 185, 200));
         label_forgerpw.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_forgerpw.setText("Lupa Kata Sandi?");
-        panelBordeer1.add(label_forgerpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(1018, 400, 140, 30));
+        label_forgerpw.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        label_forgerpw.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                label_forgerpwMouseClicked(evt);
+            }
+        });
+        panelBordeer1.add(label_forgerpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 390, 140, 30));
 
         label_salah.setFont(new java.awt.Font("Montserrat Medium", 0, 11)); // NOI18N
         label_salah.setForeground(new java.awt.Color(255, 0, 0));
         label_salah.setText("Nama Pengguna / Kata Sandi salah!");
-        panelBordeer1.add(label_salah, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 430, 210, 20));
+        panelBordeer1.add(label_salah, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 420, 210, 20));
 
-        button3.setBackground(new java.awt.Color(157, 210, 217));
-        button3.setForeground(new java.awt.Color(255, 255, 255));
-        button3.setText("DAFTAR");
-        button3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
-        button3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button3ActionPerformed(evt);
-            }
-        });
-        panelBordeer1.add(button3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 540, 380, 40));
-
-        button2.setBackground(new java.awt.Color(82, 226, 245));
-        button2.setForeground(new java.awt.Color(255, 255, 255));
-        button2.setText("MASUK");
-        button2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
-        button2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button2ActionPerformed(evt);
-            }
-        });
-        panelBordeer1.add(button2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 460, 380, 40));
-
-        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
-        panelBordeer1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 520, 320, 10));
+        jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
+        panelBordeer1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 510, 360, 10));
 
         jCheckBox1.setBackground(new java.awt.Color(247, 247, 247));
         jCheckBox1.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
@@ -140,11 +158,11 @@ public class login extends javax.swing.JFrame {
                 jCheckBox1ActionPerformed(evt);
             }
         });
-        panelBordeer1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 400, 190, 30));
+        panelBordeer1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 190, 30));
 
         jLabel5.setFont(new java.awt.Font("Montserrat Medium", 0, 13)); // NOI18N
         jLabel5.setText("Kata Sandi");
-        panelBordeer1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, 210, 30));
+        panelBordeer1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 310, 210, 30));
 
         panelBordeer3.setBackground(new java.awt.Color(255, 255, 255));
         panelBordeer3.setForeground(new java.awt.Color(226, 226, 226));
@@ -172,7 +190,7 @@ public class login extends javax.swing.JFrame {
             .addComponent(field_password, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        panelBordeer1.add(panelBordeer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 380, 50));
+        panelBordeer1.add(panelBordeer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 340, 380, 50));
 
         panelBordeer2.setBackground(new java.awt.Color(255, 255, 255));
         panelBordeer2.setForeground(new java.awt.Color(226, 226, 226));
@@ -205,24 +223,24 @@ public class login extends javax.swing.JFrame {
             .addComponent(field_username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        panelBordeer1.add(panelBordeer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 260, 380, 50));
+        panelBordeer1.add(panelBordeer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 250, 380, 50));
 
         jLabel4.setFont(new java.awt.Font("Montserrat Medium", 0, 13)); // NOI18N
         jLabel4.setText("Nama Pengguna");
-        panelBordeer1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 230, 210, 30));
+        panelBordeer1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 220, 210, 30));
 
         jLabel3.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Masukkan Nama Pengguna dan Kata Sandi");
-        panelBordeer1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 190, 340, 20));
+        panelBordeer1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 180, 340, 20));
 
         jLabel2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 34)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Selamat Datang");
-        panelBordeer1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 340, 50));
+        panelBordeer1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, 340, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/main/bg_login.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/fathan/main/bg_login1.png"))); // NOI18N
         panelBordeer1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 680));
 
         getContentPane().add(panelBordeer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 680));
@@ -330,7 +348,7 @@ public class login extends javax.swing.JFrame {
                             Thread.sleep(1);
                             if (this.getOpacity() <= 0.25) {
                                 this.dispose();
-                                System.out.println("Role : "+usr.getRole());
+                                System.out.println("Role : " + usr.getRole());
                             }
                         } catch (Exception e) {
                         }
@@ -349,16 +367,11 @@ public class login extends javax.swing.JFrame {
         }
     }
 
-    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        login();
-    }//GEN-LAST:event_button2ActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         for (double i = 0.0; i <= 1.0; i = i + 0.25) {
             String val = i + "";
             float f = Float.valueOf(val);
             this.setOpacity(f);
-            System.out.println(f);
             try {
                 Thread.sleep(2);
             } catch (Exception e) {
@@ -371,22 +384,6 @@ public class login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
-    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
-            String val = i + "";
-            float f = Float.valueOf(val);
-            this.setOpacity(f);
-            System.out.println(f);
-            try {
-                Thread.sleep(1);
-                if (this.getOpacity() <= 0.25) {
-                    System.exit(0);
-                }
-            } catch (Exception e) {
-            }
-        }
-    }//GEN-LAST:event_button3ActionPerformed
-
     private void field_usernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_field_usernameKeyTyped
         if (field_username.isEditable()) {
             label_salah.setVisible(false);
@@ -398,6 +395,29 @@ public class login extends javax.swing.JFrame {
             label_salah.setVisible(false);
         }
     }//GEN-LAST:event_field_passwordKeyTyped
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        login();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    System.exit(0);
+                }
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void label_forgerpwMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_forgerpwMouseClicked
+        new com.fathan.main.forgotPassword(this, true).setVisible(true);
+    }//GEN-LAST:event_label_forgerpwMouseClicked
 
     /**
      * @param args the command line arguments
@@ -435,8 +455,6 @@ public class login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.fathan.swing.Button button2;
-    private com.fathan.swing.Button button3;
     private javax.swing.JPasswordField field_password;
     private javax.swing.JTextField field_username;
     private javax.swing.JCheckBox jCheckBox1;
@@ -445,6 +463,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel label_forgerpw;
     private javax.swing.JLabel label_salah;
@@ -452,5 +472,7 @@ public class login extends javax.swing.JFrame {
     private com.fathan.swing.PanelBordeer panelBordeer1;
     private com.fathan.swing.PanelBordeer panelBordeer2;
     private com.fathan.swing.PanelBordeer panelBordeer3;
+    private main.PanelShadow panelShadow1;
+    private main.PanelShadow panelShadow2;
     // End of variables declaration//GEN-END:variables
 }
