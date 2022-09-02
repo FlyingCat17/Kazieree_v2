@@ -53,6 +53,7 @@ public class laporan extends javax.swing.JFrame {
         getPengeluaran();
         getDataTransaksiJual();
         getDataTransaksiBeli();
+        getDaftarPengeluaran();
         dateChooser.addEventDateChooser(new EventDateChooser() {
             @Override
             public void dateSelected(SelectedAction action, SelectedDate date) {
@@ -67,6 +68,7 @@ public class laporan extends javax.swing.JFrame {
                 getPengeluaran();
                 getDataTransaksiJual();
                 getDataTransaksiBeli();
+                getDaftarPengeluaran();
                 if (action.getAction() == SelectedAction.DAY_SELECTED) {
                     dateChooser.hidePopup();
                 }
@@ -271,9 +273,9 @@ public class laporan extends javax.swing.JFrame {
                     + "pemasok.nama_pemasok, beli.total_harga FROM beli\n"
                     + "JOIN detail_pengguna ON detail_pengguna.id_pengguna = beli.id_pengguna\n"
                     + "JOIN pemasok ON pemasok.kode_pemasok = beli.id_pemasok\n"
-                    + "WHERE EXTRACT(DAY FROM beli.tgl_transaksi) = '"+hari+"'\n"
-                    + "AND EXTRACT(MONTH FROM beli.tgl_transaksi) = '"+bulan+"'\n"
-                    + "AND EXTRACT(YEAR FROM beli.tgl_transaksi) = '"+tahun+"'";
+                    + "WHERE EXTRACT(DAY FROM beli.tgl_transaksi) = '" + hari + "'\n"
+                    + "AND EXTRACT(MONTH FROM beli.tgl_transaksi) = '" + bulan + "'\n"
+                    + "AND EXTRACT(YEAR FROM beli.tgl_transaksi) = '" + tahun + "'";
             java.sql.Connection con = (Connection) configdb.GetConnection();
             java.sql.Statement st = con.createStatement();
             java.sql.ResultSet rs = st.executeQuery(sql);
@@ -289,6 +291,36 @@ public class laporan extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.err.println("Error Load Transaksi Jual Harian : " + e.getMessage());
+        }
+    }
+
+    public void getDaftarPengeluaran() {
+        try {
+            DefaultTableModel tb_pengeluaran = new DefaultTableModel();
+            tb_pengeluaran.addColumn("Tanggal Pengeluaran");
+            tb_pengeluaran.addColumn("ID Pengguna");
+            tb_pengeluaran.addColumn("Keterangan");
+            tb_pengeluaran.addColumn("Jumlah Pengeluaran");
+            table_pengeluaran.setModel(tb_pengeluaran);
+            String sql = "SELECT tgl_pengeluaran, id_pengguna, keterangan, jumlah_pengeluaran\n"
+                    + "FROM pengeluaran\n"
+                    + "WHERE EXTRACT(DAY FROM tgl_pengeluaran) = '" + hari + "'\n"
+                    + "AND EXTRACT(MONTH FROM tgl_pengeluaran) = '" + bulan + "'\n"
+                    + "AND EXTRACT(YEAR FROM tgl_pengeluaran) = '" + tahun + "'";
+            java.sql.Connection con = (Connection) configdb.GetConnection();
+            java.sql.Statement st = con.createStatement();
+            java.sql.ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                tb_pengeluaran.addRow(new Object[]{
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    "Rp" + rs.getString(4)
+                });
+                table_pengeluaran.setModel(tb_pengeluaran);
+            }
+        } catch (Exception e) {
+            System.err.println("getDaftarPengeluaran : " + e.getMessage());
         }
     }
 
@@ -316,9 +348,6 @@ public class laporan extends javax.swing.JFrame {
         panelShadow10 = new main.PanelShadow();
         jLabel11 = new javax.swing.JLabel();
         label_laba3 = new javax.swing.JLabel();
-        panelShadow9 = new main.PanelShadow();
-        jLabel10 = new javax.swing.JLabel();
-        label_laba2 = new javax.swing.JLabel();
         panelShadow8 = new main.PanelShadow();
         jLabel9 = new javax.swing.JLabel();
         label_laba1 = new javax.swing.JLabel();
@@ -330,6 +359,15 @@ public class laporan extends javax.swing.JFrame {
         panelShadow4 = new main.PanelShadow();
         label_saldo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        panelShadow9 = new main.PanelShadow();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        table_pengeluaran = new com.fathan.swing.jtable.TableDark(){
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false; //Disallow the editing of any cell
+            }
+        };
+        jLabel10 = new javax.swing.JLabel();
         panelShadow6 = new main.PanelShadow();
         jScrollPane3 = new javax.swing.JScrollPane();
         table_transaksibeli = new com.fathan.swing.jtable.TableDark(){
@@ -446,31 +484,15 @@ public class laporan extends javax.swing.JFrame {
         label_laba3.setText("0");
         panelShadow10.add(label_laba3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 300, 50));
 
-        jPanel1.add(panelShadow10, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 290, 360, 160));
-
-        panelShadow9.setBackground(new java.awt.Color(255, 255, 255));
-        panelShadow9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(19, 179, 200));
-        jLabel10.setText("Pemasukan Lainnya");
-        panelShadow9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 310, -1));
-
-        label_laba2.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 36)); // NOI18N
-        label_laba2.setForeground(new java.awt.Color(19, 179, 200));
-        label_laba2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        label_laba2.setText("0");
-        panelShadow9.add(label_laba2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 300, 50));
-
-        jPanel1.add(panelShadow9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 360, 160));
+        jPanel1.add(panelShadow10, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, 360, 160));
 
         panelShadow8.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(19, 179, 200));
-        jLabel9.setText("Laba Bersih");
-        panelShadow8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, -1));
+        jLabel9.setText("Perkiraan Laba Bersih");
+        panelShadow8.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 270, -1));
 
         label_laba1.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 36)); // NOI18N
         label_laba1.setForeground(new java.awt.Color(19, 179, 200));
@@ -478,7 +500,7 @@ public class laporan extends javax.swing.JFrame {
         label_laba1.setText("0");
         panelShadow8.add(label_laba1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 300, 50));
 
-        jPanel1.add(panelShadow8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 360, 160));
+        jPanel1.add(panelShadow8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 360, 160));
 
         panelShadow3.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -499,13 +521,18 @@ public class laporan extends javax.swing.JFrame {
         panelShadow7.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(19, 179, 200));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Bulan");
-        panelShadow7.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 30));
+        jLabel3.setText("Laporan Bulanan");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        panelShadow7.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 190, 30));
 
-        jPanel1.add(panelShadow7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 60, 130, 50));
+        jPanel1.add(panelShadow7, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 60, 210, 50));
 
         panelShadow4.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -522,6 +549,43 @@ public class laporan extends javax.swing.JFrame {
         panelShadow4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 210, -1));
 
         jPanel1.add(panelShadow4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 360, 160));
+
+        panelShadow9.setBackground(new java.awt.Color(255, 255, 255));
+        panelShadow9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane4.setBorder(null);
+
+        table_pengeluaran.setForeground(new java.awt.Color(51, 51, 51));
+        table_pengeluaran.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        table_pengeluaran.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        table_pengeluaran.setGridColor(new java.awt.Color(255, 255, 255));
+        table_pengeluaran.getTableHeader().setResizingAllowed(false);
+        table_pengeluaran.getTableHeader().setReorderingAllowed(false);
+        table_pengeluaran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_pengeluaranMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(table_pengeluaran);
+
+        panelShadow9.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 990, 280));
+
+        jLabel10.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 20)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(19, 179, 200));
+        jLabel10.setText("Daftar Pengeluaran Harian");
+        panelShadow9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 30));
+
+        jPanel1.add(panelShadow9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 1370, 1100, 410));
 
         panelShadow6.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -558,7 +622,7 @@ public class laporan extends javax.swing.JFrame {
         jLabel8.setText("Pembelian Produk (Transaksi Beli)");
         panelShadow6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 30));
 
-        jPanel1.add(panelShadow6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 910, 1100, 410));
+        jPanel1.add(panelShadow6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 920, 1100, 410));
 
         panelShadow5.setBackground(new java.awt.Color(255, 255, 255));
         panelShadow5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -689,6 +753,26 @@ public class laporan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_table_transaksibeliMouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        for (double i = 1.0; i >= 0.1; i = i - 0.25) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(1);
+                if (this.getOpacity() <= 0.25) {
+                    this.dispose();
+                }
+            } catch (Exception e) {
+            }
+        }
+        new com.fathan.form.laporan.laporanBulan().setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void table_pengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_pengeluaranMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table_pengeluaranMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -753,10 +837,10 @@ public class laporan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel label_laba;
     private javax.swing.JLabel label_laba1;
-    private javax.swing.JLabel label_laba2;
     private javax.swing.JLabel label_laba3;
     private javax.swing.JLabel label_pendapatan;
     private javax.swing.JLabel label_saldo;
@@ -775,6 +859,7 @@ public class laporan extends javax.swing.JFrame {
     private com.fathan.swing.PanelRound panel_top;
     private com.fathan.swing.PanelRound panel_top1;
     private javax.swing.JScrollPane scroll;
+    private com.fathan.swing.jtable.TableDark table_pengeluaran;
     private com.fathan.swing.jtable.TableDark table_transaksibeli;
     private com.fathan.swing.jtable.TableDark table_transaksijual;
     // End of variables declaration//GEN-END:variables
